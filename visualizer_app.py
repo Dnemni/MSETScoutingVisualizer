@@ -56,6 +56,8 @@ for key, scores in evscr.items():
   data.update({key:[q1, median, q3, minimum, maximum]})
 print(data)
 
+st.subheader('Raw data')
+st.write(data)
 
 #App and Chart Formation
 st.title("MSET Scouting Data Visualizer")
