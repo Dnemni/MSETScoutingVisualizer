@@ -1,6 +1,3 @@
-# Welcome to Streamlit!
+# Scouting App Visualizer for Blue Alliance API
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire. :heart:
-
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
+Takes information from Blue Alliance and outputs match scores based on year and events. Creates and displays a boxplot from the data.
