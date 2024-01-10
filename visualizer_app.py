@@ -6,7 +6,7 @@ import tbapy
 import datetime
 
 st.title("MSET Scouting Data Visualizer")
-ddown = st.selectbox()
+ddown = st.multiselect("Which events do you want to compare", ["cas", "cap"], ["caq", "car"])
 st.write(ddown, "Events is", x * x)
 
 #Blue Alliance API Parsing
