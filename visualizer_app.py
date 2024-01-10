@@ -5,6 +5,9 @@ import streamlit as st
 import tbapy
 import datetime
 
+st.title("MSET Scouting Data Visualizer")
+ddown = st.selectbox()
+st.write(ddown, "Events is", x * x)
 
 #Blue Alliance API Parsing
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
@@ -54,13 +57,8 @@ for key, scores in evscr.items():
   minimum = np.min(scores)
   maximum = np.max(scores)
   data.update({key:[q1, median, q3, minimum, maximum]})
-print(data)
-
-st.subheader('Raw data')
-st.write(data)
 
 #App and Chart Formation
-st.title("MSET Scouting Data Visualizer")
 num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
 num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
 
