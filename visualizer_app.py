@@ -6,8 +6,8 @@ import tbapy
 import datetime
 
 st.title("MSET Scouting Data Visualizer")
-ddown = st.multiselect("Which events do you want to compare", ["cas", "cap"], ["caq", "car"])
-st.write(ddown, "Events is", x * x)
+e = st.multiselect("Which events do you want to compare", ["cas", "cap", "caq", "car"], ["caq", "car"])
+st.write("You selected:", e)
 
 #Blue Alliance API Parsing
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
