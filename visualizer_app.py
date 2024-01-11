@@ -72,8 +72,6 @@ while True:
     tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
 
     tmyrs = getTeamYears(tm)
-    st.write("Type", type(tmyrs))
-    st.write("Tmyrs", tmyrs)
     tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
 
     
