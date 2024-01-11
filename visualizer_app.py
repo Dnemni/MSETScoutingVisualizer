@@ -64,8 +64,10 @@ for key, scores in evscr.items():
 
 #App and Chart Formation
 tm = 649
+cat = 0
 while True:
-    tm = st.text_input("Team Number", "649")
+    if cat > 0:
+        tm = st.text_input("Team Number", "649")
     st.write("You selected:", tm)
     
     if tm != None or tm1 != tm:
@@ -82,6 +84,7 @@ while True:
 
     tm1 = tm
     tmy1 =tmy
+    cat += 1
 
 num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
 num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
