@@ -63,7 +63,7 @@ for key, scores in evscr.items():
   data.update({key:[q1, median, q3, minimum, maximum]})
 
 #App and Chart Formation
-tm = st.text_input("Team Number", "649")
+tm = 649
 while True:
     tm = st.text_input("Team Number", "649")
     st.write("You selected:", tm)
