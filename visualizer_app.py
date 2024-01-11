@@ -67,6 +67,8 @@ tm = st.text_input("Team Number", "649")
 st.write("You selected:", tm)
 
 tmyrs = getTeamYears(tm)
+st.write("Type", type(tmyrs))
+st.write("Tmyrs", tmyrs)
 tmy = st.selectbox("Which year do you want to check", tmyrs)
 st.write("You selected:", tmy)
 
