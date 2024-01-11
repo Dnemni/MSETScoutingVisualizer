@@ -63,28 +63,24 @@ for key, scores in evscr.items():
   data.update({key:[q1, median, q3, minimum, maximum]})
 
 #App and Chart Formation
-tm = 649
-cat = 0
 while True:
-    if cat > 0:
-        tm = st.text_input("Team Number", "649")
+    tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
     st.write("You selected:", tm)
     
     if tm != None or tm1 != tm:
         tmyrs = getTeamYears(tm)
         st.write("Type", type(tmyrs))
         st.write("Tmyrs", tmyrs)
-        tmy = st.selectbox("Which year do you want to check", tmyrs)
+        tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
         st.write("You selected:", tmy)
 
         if tmy !=None or tmy1 != tmy:
             tyevents = getTeamEvents(tm, tmy)
-            evnt = st.multiselect("Which events do you want to compare", tyevents, [])
+            evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
             st.write("You selected:", evnt)
 
     tm1 = tm
     tmy1 =tmy
-    cat += 1
 
 num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
 num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
