@@ -57,17 +57,19 @@ def getTeamEvents(team, yr):
 def getTeamYears(team):
     return tba.team_years("frc"+str(team))
 
-evscr = getscoreinfo(649,2022,["casf","casj", "tur"])
-data = {}
-for key, scores in evscr.items():
-  q1 = np.percentile(scores, 25)
-  median = np.percentile(scores, 50)
-  q3 = np.percentile(scores, 75)
-  minimum = np.min(scores)
-  maximum = np.max(scores)
-  data.update({key:[q1, median, q3, minimum, maximum]})
+def getTeamData(team, year, events):
+    evscr = getscoreinfo(team, year, events)
+    data = {}
+    for key, scores in evscr.items():
+        q1 = np.percentile(scores, 25)
+        median = np.percentile(scores, 50)
+        q3 = np.percentile(scores, 75)
+        minimum = np.min(scores)
+        maximum = np.max(scores)
+        data.update({key:[q1, median, q3, minimum, maximum]})
+    return data
 
-#App and Chart Formation
+#Input
 tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
 
 tmyrs = getTeamYears(tm)
@@ -77,31 +79,54 @@ tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
 tyevents = getTeamEvents(tm, tmy)
 evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
 
-tm1 = tm
-tmy1 =tmy
+#Charts
+tmscrs = getTeamData(tm, tmy, evnt)
+evscr = getscoreinfo(tm, tmy, evnt)
+scrdata = [[]]
+for key, scores in evscr.items():
+    scrdata.append(scores)
 
-num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
-num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
-
-indices = np.linspace(0, 1, num_points)
-theta = 2 * np.pi * num_turns * indices
-radius = indices
-
-x = radius * np.cos(theta)
-y = radius * np.sin(theta)
-
-df = pd.DataFrame({
-    "x": x,
-    "y": y,
-    "idx": indices,
-    "rand": np.random.randn(num_points),
-})
-
-st.altair_chart(alt.Chart(df, height=700, width=700)
-    .mark_point(filled=True)
-    .encode(
-        x=alt.X("x", axis=None),
-        y=alt.Y("y", axis=None),
-        color=alt.Color("idx", legend=None, scale=alt.Scale()),
-        size=alt.Size("rand", legend=None, scale=alt.Scale(range=[1, 150])),
-    ))
+option = {
+    "title": [
+        {"text": "Team " + str(tm) + " Scoring Boxplots", "left": "center"},
+        {
+            "text": "upper: Q3 + 1.5 * IQR \nlower: Q1 - 1.5 * IQR",
+            "borderColor": "#999",
+            "borderWidth": 1,
+            "textStyle": {"fontWeight": "normal", "fontSize": 14, "lineHeight": 20},
+            "left": "10%",
+            "top": "90%",
+        },
+    ],
+    "dataset": [
+        {
+            "source": scrdata
+        },
+        {
+            "transform": {
+                "type": "boxplot",
+                "config": {"itemNameFormatter": "expr {value}"},
+            }
+        },
+        {"fromDatasetIndex": 1, "fromTransformResult": 1},
+    ],
+    "tooltip": {"trigger": "item", "axisPointer": {"type": "shadow"}},
+    "grid": {"left": "10%", "right": "10%", "bottom": "15%"},
+    "xAxis": {
+        "type": "category",
+        "boundaryGap": True,
+        "nameGap": 30,
+        "splitArea": {"show": False},
+        "splitLine": {"show": False},
+    },
+    "yAxis": {
+        "type": "value",
+        "name": "km/s minus 299,000",
+        "splitArea": {"show": True},
+    },
+    "series": [
+        {"name": "boxplot", "type": "boxplot", "datasetIndex": 1},
+        {"name": "outlier", "type": "scatter", "datasetIndex": 2},
+    ],
+}
+st_echarts(option, height="500px")
