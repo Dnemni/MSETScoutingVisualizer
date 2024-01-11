@@ -47,10 +47,10 @@ def getscoreinfo(t, y, events):
   return d
 
 def getTeamEvents(team, yr):
-    tba.team_events(team, yr)
+    tba.team_events("frc"+str(team), yr)
 
 def getTeamYears(team):
-    tba.team_years(team)
+    tba.team_years("frc"+str(team))
 
 evscr = getscoreinfo(649,2022,["casf","casj", "tur"])
 data = {}
@@ -64,17 +64,24 @@ for key, scores in evscr.items():
 
 #App and Chart Formation
 tm = st.text_input("Team Number", "649")
-st.write("You selected:", tm)
+while True:
+    tm = st.text_input("Team Number", "649")
+    st.write("You selected:", tm)
+    
+    if tm != None or tm1 != tm:
+        tmyrs = getTeamYears(tm)
+        st.write("Type", type(tmyrs))
+        st.write("Tmyrs", tmyrs)
+        tmy = st.selectbox("Which year do you want to check", tmyrs)
+        st.write("You selected:", tmy)
 
-tmyrs = getTeamYears(tm)
-st.write("Type", type(tmyrs))
-st.write("Tmyrs", tmyrs)
-tmy = st.selectbox("Which year do you want to check", tmyrs)
-st.write("You selected:", tmy)
+        if tmy !=None or tmy1 != tmy:
+            tyevents = getTeamEvents(tm, tmy)
+            evnt = st.multiselect("Which events do you want to compare", tyevents, [])
+            st.write("You selected:", evnt)
 
-tyevents = getTeamEvents(tm, tmy)
-evnt = st.multiselect("Which events do you want to compare", tyevents, [])
-st.write("You selected:", evnt)
+    tm1 = tm
+    tmy1 =tmy
 
 num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
 num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
