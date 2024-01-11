@@ -47,10 +47,10 @@ def getscoreinfo(t, y, events):
   return d
 
 def getTeamEvents(team, yr):
-    tba.team_events("frc"+str(team), yr)
+    return tba.team_events("frc"+str(team), yr)
 
 def getTeamYears(team):
-    tba.team_years("frc"+str(team))
+    return tba.team_years("frc"+str(team))
 
 evscr = getscoreinfo(649,2022,["casf","casj", "tur"])
 data = {}
@@ -66,18 +66,17 @@ for key, scores in evscr.items():
 while True:
     tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
     st.write("You selected:", tm)
-    
-    if tm != None or tm1 != tm:
-        tmyrs = getTeamYears(tm)
-        st.write("Type", type(tmyrs))
-        st.write("Tmyrs", tmyrs)
-        tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
-        st.write("You selected:", tmy)
 
-        if tmy !=None or tmy1 != tmy:
-            tyevents = getTeamEvents(tm, tmy)
-            evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
-            st.write("You selected:", evnt)
+    tmyrs = getTeamYears(tm)
+    st.write("Type", type(tmyrs))
+    st.write("Tmyrs", tmyrs)
+    tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
+    st.write("You selected:", tmy)
+
+    
+    tyevents = getTeamEvents(tm, tmy)
+    evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
+    st.write("You selected:", evnt)
 
     tm1 = tm
     tmy1 =tmy
