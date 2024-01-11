@@ -47,7 +47,12 @@ def getscoreinfo(t, y, events):
   return d
 
 def getTeamEvents(team, yr):
-    return tba.team_events("frc"+str(team), yr)
+    e = []
+    evs = tba.team_events("frc"+str(team), yr)
+    for evnts in evs:
+        e.append(evnts.event_code)
+    return e
+
 
 def getTeamYears(team):
     return tba.team_years("frc"+str(team))
@@ -65,18 +70,15 @@ for key, scores in evscr.items():
 #App and Chart Formation
 while True:
     tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
-    st.write("You selected:", tm)
 
     tmyrs = getTeamYears(tm)
     st.write("Type", type(tmyrs))
     st.write("Tmyrs", tmyrs)
     tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
-    st.write("You selected:", tmy)
 
     
     tyevents = getTeamEvents(tm, tmy)
     evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
-    st.write("You selected:", evnt)
 
     tm1 = tm
     tmy1 =tmy
