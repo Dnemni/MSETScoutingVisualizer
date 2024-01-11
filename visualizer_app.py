@@ -4,6 +4,7 @@ import pandas as pd
 import streamlit as st
 import tbapy
 import datetime
+from streamlit_echarts import st_echarts
 
 st.title("MSET Scouting Data Visualizer")
 
@@ -121,7 +122,7 @@ option = {
     },
     "yAxis": {
         "type": "value",
-        "name": "km/s minus 299,000",
+        "name": "points scored",
         "splitArea": {"show": True},
     },
     "series": [
