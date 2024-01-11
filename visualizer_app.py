@@ -6,8 +6,6 @@ import tbapy
 import datetime
 
 st.title("MSET Scouting Data Visualizer")
-e = st.multiselect("Which events do you want to compare", ["cas", "cap", "caq", "car"], ["caq", "car"])
-st.write("You selected:", e)
 
 #Blue Alliance API Parsing
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
@@ -48,6 +46,12 @@ def getscoreinfo(t, y, events):
     d[event] = score
   return d
 
+def getTeamEvents(team, yr):
+    tba.team_events(team, yr)
+
+def getTeamYears(team):
+    tba.team_years(team)
+
 evscr = getscoreinfo(649,2022,["casf","casj", "tur"])
 data = {}
 for key, scores in evscr.items():
@@ -59,6 +63,17 @@ for key, scores in evscr.items():
   data.update({key:[q1, median, q3, minimum, maximum]})
 
 #App and Chart Formation
+tm = st.text_input("Team Number", "649")
+st.write("You selected:", tm)
+
+tmyrs = getTeamYears(tm)
+tmy = st.selectbox("Which year do you want to check", tmyrs)
+st.write("You selected:", tmy)
+
+tyevents = getTeamEvents(tm, tmy)
+evnt = st.multiselect("Which events do you want to compare", tyevents, [])
+st.write("You selected:", evnt)
+
 num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
 num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
 
