@@ -118,7 +118,7 @@ df = pd.DataFrame([(event, score) for event, scores in evscr.items() for score i
 
 boxplot = alt.Chart(df).mark_boxplot(extent="min-max", size = 50).encode(
     alt.X("Event:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="black", gridColor="black", labelColor="black", tickColor="black", titleColor="black")),
-    alt.Y("Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="black", gridColor="black", labelColor="black", tickColor="black", titleColor="black")),).scale(zero=False),
+    alt.Y("Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="black", gridColor="black", labelColor="black", tickColor="black", titleColor="black")).scale(zero=False),
     alt.Color("Event:N").legend(None),
     ).properties(
         width=400,
