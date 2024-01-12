@@ -138,8 +138,10 @@ st_echarts(option, height="500px")
 
 """
 
+d = alt.Data(values=[{"Event": "casf", "Points Scored": [1,2,3,4,5]}]
 
-boxplot = alt.Chart(data).mark_boxplot(extent="min-max").encode(
+
+boxplot = alt.Chart(d).mark_boxplot(extent="min-max").encode(
     alt.X("Event:N"),
     alt.Y("Points Scored:Q").scale(zero=False),
     alt.Color("Origin:N").legend(None),
