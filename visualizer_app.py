@@ -91,7 +91,7 @@ for key, scores in evscr.items():
         maxlen = len(scores)
 for key, scores in evscr.items():
     sc = scores
-    for num in maxlen-length(scores):
+    for num in maxlen-len(scores):
         sc.append(NA)
     dic = {"Event": key, "Points Scored": sc}
     scrdata.append(dic)
