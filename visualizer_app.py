@@ -106,7 +106,7 @@ st.sidebar.title("Select Team")
 class SideBarSetup:
     def tmnumIN(self):
         with st.sidebar:
-            tm = st.text_input("Team Number", "...", key = "teamname", placeholder = "649")
+            tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
         return tm
 
     def tmyrIN(self):
@@ -136,7 +136,7 @@ sb1 = SideBarSetup()
 tm = sb1.tmnumIN()
 tmy = sb1.tmyrIN()
 evnt = sb1.tmyrevIN()
-if st.button("Add Team", type="primary"):
+if st.sidebar.button("Add Team", type="primary"):
     sb2 = SideBarSetup()
     tm = sb2.tmnumIN()
     tmy = sb2.tmyrIN()
