@@ -134,7 +134,8 @@ st_echarts(option, height="500px")
 
 """
 st.write(scrdata[0])
-boxplot = alt.Chart(scrdata[0]).mark_boxplot().encode(
+[s, h] = boxplot(scrdata[0]));
+"""boxplot = alt.Chart(scrdata[0]).mark_boxplot().encode(
         x='Category:N',
         y='Value:Q'
     ).properties(
@@ -144,6 +145,6 @@ boxplot = alt.Chart(scrdata[0]).mark_boxplot().encode(
         fontSize=16,
         anchor='start'
     )
-
+"""
 # Display the boxplot
 st.altair_chart(boxplot, use_container_width=True)
