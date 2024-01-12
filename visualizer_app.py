@@ -105,14 +105,20 @@ st.sidebar.title("Select Team")
 
 class SideBarSetup:
     def __init__():
+        
+    def tmnumIN:
         tm = st.text_input("Team Number", "...", key = "teamname", placeholder = "649")
+        return tm
 
+    def tmyrIN:
         tmyrs = getTeamYears(tm)
         tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
+        return tmy
 
-
+    def tmyrevIN:
         tyevents = getTeamEvents(tm, tmy)
         evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
+        return evnt
 
 
 with st.sidebar:
@@ -126,6 +132,9 @@ with st.sidebar:
     evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
     """
     sb1 = SideBarSetup()
+    tm = sb1.tmnumIN()
+    tmy = sb1.tmyrIN()
+    evnt = tmyrevIN()
     if st.button("Add Team", type="primary"):
         
 
