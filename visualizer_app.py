@@ -82,67 +82,26 @@ evnt = st.multiselect("Which events do you want to compare", tyevents, [], key =
 #Charts
 tmscrs = getTeamData(tm, tmy, evnt)
 evscr = getscoreinfo(tm, tmy, evnt)
-print(getscoreinfo("649", 2022, ["casf", "casj", "tur"]))
 
-st.write(evscr)
 data = alt.Data(values=evscr)
-scrdata = [[]]
+scrdata = [{}]
+maxlen = 0
 for key, scores in evscr.items():
-    scrdata.append(scores)
+    lnt = len(scores)
+    if(lnt > maxlen):
+        maxlen = len
+for key, scores in evscr.items():
+    sc = c(scores, rep(NA, maxlen - length(scores)))
+    dic = {"Event": key, "Points Scored": sc}
+    scrdata.append(dic)
 
-"""
-option = {
-    "title": [
-        {"text": "Team " + str(tm) + " Scoring Boxplots", "left": "center"},
-        {
-            "text": "upper: Q3 + 1.5 * IQR \nlower: Q1 - 1.5 * IQR",
-            "borderColor": "#999",
-            "borderWidth": 1,
-            "textStyle": {"fontWeight": "normal", "fontSize": 14, "lineHeight": 20},
-            "left": "10%",
-            "top": "90%",
-        },
-    ],
-    "dataset": [
-        {
-            "source": scrdata
-        },
-        {
-            "transform": {
-                "type": "boxplot",
-                "config": {"itemNameFormatter": "expr {value}"},
-            }
-        },
-        {"fromDatasetIndex": 1, "fromTransformResult": 1},
-    ],
-    "tooltip": {"trigger": "item", "axisPointer": {"type": "shadow"}},
-    "grid": {"left": "10%", "right": "10%", "bottom": "15%"},
-    "xAxis": {
-        "type": "category",
-        "boundaryGap": True,
-        "nameGap": 30,
-        "splitArea": {"show": False},
-        "splitLine": {"show": False},
-    },
-    "yAxis": {
-        "type": "value",
-        "name": "points scored",
-        "splitArea": {"show": True},
-    },
-    "series": [
-        {"name": "boxplot", "type": "boxplot", "datasetIndex": 1},
-        {"name": "outlier", "type": "scatter", "datasetIndex": 2},
-    ],
-}
-st_echarts(option, height="500px")
-
-"""
+df = data.frame(scrdata)
 
 d = pd.DataFrame({"Event": "casf", "Points Scored": [1,2,3,4,5]})
 #alt.Data(values=[{"Event": "casf", "Points Scored": [1,2,3,4,5]}])
 
 
-boxplot = alt.Chart(d).mark_boxplot(extent="min-max").encode(
+boxplot = alt.Chart(df).mark_boxplot(extent="min-max").encode(
     alt.X("Event:N"),
     alt.Y("Points Scored:Q").scale(zero=False),
     alt.Color("Origin:N").legend(None),
@@ -155,4 +114,3 @@ boxplot = alt.Chart(d).mark_boxplot(extent="min-max").encode(
     )
 # Display the boxplot
 st.altair_chart(boxplot, use_container_width=True)
-st.write(data)
