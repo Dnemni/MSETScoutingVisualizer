@@ -84,7 +84,7 @@ tmscrs = getTeamData(tm, tmy, evnt)
 evscr = getscoreinfo(tm, tmy, evnt)
 
 data = alt.Data(values=evscr)
-scrdata = [{"A": []}]
+scrdata = [{}]
 maxlen = 0
 for key, scores in evscr.items():
     if len(scores) > maxlen:
@@ -97,7 +97,7 @@ for key, scores in evscr.items():
     scrdata.append(dic)
 
 df = pd.DataFrame(scrdata)
-df.drop("A", axis=1, inplace = True)
+df.drop(0, axis=0, inplace = True)
 st.write(df)
 
 boxplot = alt.Chart(df).mark_boxplot(extent="min-max").encode(
