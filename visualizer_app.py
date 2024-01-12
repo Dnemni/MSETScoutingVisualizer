@@ -85,8 +85,6 @@ evscr = getscoreinfo(tm, tmy, evnt)
 print(getscoreinfo("649", 2022, ["casf", "casj", "tur"]))
 
 st.write(evscr)
-data = pd.DataFrame.from_dict(evscr)
-st.write(data)
 scrdata = [[]]
 for key, scores in evscr.items():
     scrdata.append(scores)
@@ -139,8 +137,8 @@ st_echarts(option, height="500px")
 
 """
 
-st.write(data)
-boxplot = alt.Chart(data[0]).mark_boxplot().encode(
+
+boxplot = alt.Chart(evscr).mark_boxplot().encode(
     alt.X("Origin:N"),
     alt.Y("Miles_per_Gallon:Q").scale(zero=False),
     alt.Color("Origin:N").legend(None),
