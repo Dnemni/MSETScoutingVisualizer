@@ -97,10 +97,7 @@ for key, scores in evscr.items():
     scrdata.append(dic)
 
 df = pd.DataFrame(scrdata)
-
-d = pd.DataFrame({"Event": "casf", "Points Scored": [1,2,3,4,5]})
-#alt.Data(values=[{"Event": "casf", "Points Scored": [1,2,3,4,5]}])
-
+st.write(scrdata)
 
 boxplot = alt.Chart(df).mark_boxplot(extent="min-max").encode(
     alt.X("Event:N"),
@@ -115,3 +112,21 @@ boxplot = alt.Chart(df).mark_boxplot(extent="min-max").encode(
     )
 # Display the boxplot
 st.altair_chart(boxplot, use_container_width=True)
+
+d = pd.DataFrame({"Event": "casf", "Points Scored": [1,2,3,4,5]})
+st.write(d)
+
+boxplot2 = alt.Chart(d).mark_boxplot(extent="min-max").encode(
+    alt.X("Event:N"),
+    alt.Y("Points Scored:Q").scale(zero=False),
+    alt.Color("Origin:N").legend(None),
+    ).properties(
+        width=400,
+        height=300
+    ).configure_title(
+        fontSize=16,
+        anchor='start'
+    )
+# Display the boxplot
+st.altair_chart(boxplot2, use_container_width=True)
+
