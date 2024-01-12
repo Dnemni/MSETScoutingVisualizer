@@ -87,6 +87,7 @@ scrdata = [[]]
 for key, scores in evscr.items():
     scrdata.append(scores)
 
+"""
 option = {
     "title": [
         {"text": "Team " + str(tm) + " Scoring Boxplots", "left": "center"},
@@ -131,3 +132,46 @@ option = {
     ],
 }
 st_echarts(option, height="500px")
+
+"""
+
+data = np.random.randn(100, 3)
+st_echarts(echarts_code="""
+{
+    tooltip: {
+        trigger: 'item',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    toolbox: {
+        feature: {
+            dataZoom: {
+                yAxisIndex: 'none'
+            },
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'category',
+        data: ['Data Set 1', 'Data Set 2', 'Data Set 3']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name: 'boxplot',
+            type: 'boxplot',
+            data: """ + str(data.tolist()) + """
+        }
+    ]
+}
+""", height=500)
