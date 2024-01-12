@@ -4,8 +4,6 @@ import pandas as pd
 import streamlit as st
 import tbapy
 import datetime
-import pyecharts.options as opts
-from pyecharts.charts import Grid, Boxplot, Scatter
 
 st.title("MSET Scouting Data Visualizer")
 
