@@ -101,6 +101,7 @@ def getTeamData(team, year, events):
     return data
 
 #Input
+st.sidebar.title("Select Team")
 
 with st.sidebar():
     tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
