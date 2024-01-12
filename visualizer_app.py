@@ -84,7 +84,6 @@ tmscrs = getTeamData(tm, tmy, evnt)
 evscr = getscoreinfo(tm, tmy, evnt)
 
 df = pd.DataFrame([(event, score) for event, scores in evscr.items() for score in scores], columns=['Event', 'Points Scored'])
-st.write(df)
 
 boxplot = alt.Chart(df).mark_boxplot(extent="min-max", size = 50).encode(
     alt.X("Event:N"),
