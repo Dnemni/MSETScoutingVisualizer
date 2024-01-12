@@ -104,18 +104,18 @@ def getTeamData(team, year, events):
 st.sidebar.title("Select Team")
 
 class SideBarSetup:
-    def tmnumIN():
+    def tmnumIN(self):
         with st.sidebar:
             tm = st.text_input("Team Number", "...", key = "teamname", placeholder = "649")
         return tm
 
-    def tmyrIN():
+    def tmyrIN(self):
         with st.sidebar:
             tmyrs = getTeamYears(tm)
             tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
         return tmy
 
-    def tmyrevIN():
+    def tmyrevIN(self):
         with st.sidebar:
             tyevents = getTeamEvents(tm, tmy)
             evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
