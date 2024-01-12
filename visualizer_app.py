@@ -144,14 +144,17 @@ class SideBarSetup:
         evnt = sb2.tmyrevIN()
     """
 x = 1
+sblist = []
 for i in range(x):
+    sbslist = []
     sb = SideBarSetup()
     tm = sb.tmnumIN(x)
     tmy = sb.tmyrIN(x)
     evnt = sb.tmyrevIN(x)
     if st.sidebar.button("Add Team", type="primary"):
         x += 1
-        
+    sbslist.append(sb)
+sblist = sbslist
 
 #Charts
 tmscrs = getTeamData(tm, tmy, evnt)
