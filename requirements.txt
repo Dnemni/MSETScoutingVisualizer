@@ -2,4 +2,3 @@ altair
 pandas
 tbapy
 streamlit
-streamlit-echarts
