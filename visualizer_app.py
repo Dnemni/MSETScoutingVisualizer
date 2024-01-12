@@ -132,8 +132,12 @@ with st.sidebar:
     sb1 = SideBarSetup()
     tm = sb1.tmnumIN()
     tmy = sb1.tmyrIN()
-    evnt = tmyrevIN()
+    evnt = sb1.tmyrevIN()
     if st.button("Add Team", type="primary"):
+        sb2 = SideBarSetup()
+        tm = sb2.tmnumIN()
+        tmy = sb2.tmyrIN()
+        evnt = sb2.tmyrevIN()
         
 
 #Charts
