@@ -83,6 +83,7 @@ evnt = st.multiselect("Which events do you want to compare", tyevents, [], key =
 #Charts
 tmscrs = getTeamData(tm, tmy, evnt)
 evscr = getscoreinfo(tm, tmy, evnt)
+"""
 st.write(evscr)
 data = pd.DataFrame.from_dict(evscr)
 st.write(data)
@@ -90,7 +91,7 @@ scrdata = [[]]
 for key, scores in evscr.items():
     scrdata.append(scores)
 
-"""
+""""""
 option = {
     "title": [
         {"text": "Team " + str(tm) + " Scoring Boxplots", "left": "center"},
@@ -136,7 +137,7 @@ option = {
 }
 st_echarts(option, height="500px")
 
-"""
+""""""
 
 st.write(data)
 boxplot = alt.Chart(data).mark_boxplot().encode(
@@ -152,3 +153,4 @@ boxplot = alt.Chart(data).mark_boxplot().encode(
     )
 # Display the boxplot
 st.altair_chart(boxplot, use_container_width=True)
+"""
