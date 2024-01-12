@@ -5,14 +5,14 @@ import streamlit as st
 import tbapy
 import datetime
 
-st.title("MSET Scouting Data Visualizer")
-
 st.set_page_config(
     page_title="MSET Scouting Data Visualizer",
     page_icon=":chart:",  # You can use any emoji as an icon
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+st.title("MSET Scouting Data Visualizer")
 
 # Set theme
 theme = {
