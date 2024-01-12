@@ -152,3 +152,4 @@ boxplot = alt.Chart(data).mark_boxplot(extent="min-max").encode(
     )
 # Display the boxplot
 st.altair_chart(boxplot, use_container_width=True)
+st.write(data)
