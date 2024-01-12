@@ -11,41 +11,40 @@ st.title("MSET Scouting Data Visualizer")
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
 
 def getinfo(t, yearlist, curyear):
-  team = tba.team(t)
-  years = tba.team_years(t)
-  years = set(years).intersection(set(yearlist))
-  for y in years:
-    print(y)
-    events = tba.team_events(t, y)
-    awards = tba.team_awards(t, y)
-    matches = tba.team_matches(t, year=y)
-    print('team was active during %s years.' % years)
-    print('In %d, team was in %d events: %s.' % (y, len(events), ', '.join(event.event_code for event in events)))
-    print('In %d, team won %d awards, award list: %s.' % (y, len(awards), ",".join('%s (%s)' % (award.name, award.event_key) for award in awards)))
-    #print('In %d, team match results are: %s.' % (y, ",".join(matches)))
-    print()
+    team = tba.team(t)
+    years = tba.team_years(t)
+    years = set(years).intersection(set(yearlist))
+    for y in years:
+        print(y)
+        events = tba.team_events(t, y)
+        awards = tba.team_awards(t, y)
+        matches = tba.team_matches(t, year=y)
+        print('team was active during %s years.' % years)
+        print('In %d, team was in %d events: %s.' % (y, len(events), ', '.join(event.event_code for event in events)))
+        print('In %d, team won %d awards, award list: %s.' % (y, len(awards), ",".join('%s (%s)' % (award.name, award.event_key) for award in awards)))
+        #print('In %d, team match results are: %s.' % (y, ",".join(matches)))
+        print()
 
 def getscoreinfo(t, y, events):
-  d = {}
-  for event in events:
-    matches = tba.team_matches(team=t, year=y)
-    score = []
-    for alliance in matches:
-        blue_score = alliance['alliances']['blue']['score']
-        blue_teams = alliance['alliances']['blue']['team_keys']
-        red_score = alliance['alliances']['red']['score']
-        red_teams = alliance['alliances']['red']['team_keys']
-        eventChosen = alliance['event_key']
+    d = {}
+    for event in events:
+        matches = tba.team_matches(team="frc"+str(t), year=y)
+        score = []
+        for alliance in matches:
+            blue_score = alliance['alliances']['blue']['score']
+            blue_teams = alliance['alliances']['blue']['team_keys']
+            red_score = alliance['alliances']['red']['score']
+            red_teams = alliance['alliances']['red']['team_keys']
+            eventChosen = alliance['event_key']
 
-        teamcode = "frc"+str(t)
-        if eventChosen == (str(y) + event):
-          if teamcode in blue_teams:
-            score.append(blue_score)
-          else:
-            score.append(red_score)
-    if score:
+            teamcode = "frc"+str(t)
+            if eventChosen == (str(y) + event):
+                if teamcode in blue_teams:
+                    score.append(blue_score)
+                else:
+                    score.append(red_score)
         d[event] = score
-  return d
+    return d
 
 def getTeamEvents(team, yr):
     e = []
@@ -82,9 +81,9 @@ evnt = st.multiselect("Which events do you want to compare", tyevents, [], key =
 
 #Charts
 tmscrs = getTeamData(tm, tmy, evnt)
-#evscr = getscoreinfo(tm, tmy, evnt)
+evscr = getscoreinfo(tm, tmy, evnt)
 print(getscoreinfo("649", 2022, ["casf", "casj", "tur"]))
-"""
+
 st.write(evscr)
 data = pd.DataFrame.from_dict(evscr)
 st.write(data)
@@ -92,7 +91,7 @@ scrdata = [[]]
 for key, scores in evscr.items():
     scrdata.append(scores)
 
-""""""
+"""
 option = {
     "title": [
         {"text": "Team " + str(tm) + " Scoring Boxplots", "left": "center"},
@@ -138,7 +137,7 @@ option = {
 }
 st_echarts(option, height="500px")
 
-""""""
+"""
 
 st.write(data)
 boxplot = alt.Chart(data).mark_boxplot().encode(
@@ -154,4 +153,3 @@ boxplot = alt.Chart(data).mark_boxplot().encode(
     )
 # Display the boxplot
 st.altair_chart(boxplot, use_container_width=True)
-"""
