@@ -43,8 +43,8 @@ def getscoreinfo(t, y, events):
             score.append(blue_score)
           else:
             score.append(red_score)
-    d[event] = score
-    st.write(d)
+    if score:
+        d[event] = score
   return d
 
 def getTeamEvents(team, yr):
@@ -82,7 +82,8 @@ evnt = st.multiselect("Which events do you want to compare", tyevents, [], key =
 
 #Charts
 tmscrs = getTeamData(tm, tmy, evnt)
-evscr = getscoreinfo(tm, tmy, evnt)
+#evscr = getscoreinfo(tm, tmy, evnt)
+print(getscoreinfo("649", 2022, ["casf", "casj", "tur"]))
 """
 st.write(evscr)
 data = pd.DataFrame.from_dict(evscr)
