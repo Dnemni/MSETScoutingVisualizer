@@ -1,5 +1,5 @@
 altair
 pandas
-streamlit
 tbapy
-streamlit-echarts
+streamlit>=0.69
+streamlit-echarts>=0.4.0
