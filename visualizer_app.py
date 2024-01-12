@@ -114,12 +114,11 @@ boxplot = alt.Chart(df).mark_boxplot(extent="min-max").encode(
 # Display the boxplot
 st.altair_chart(boxplot, use_container_width=True)
 
-d = pd.DataFrame(
-    {
+dscr = {
         "Event": ["casf","casj","tur"],
         "Points Scored": [[1,2,3],[7,1,8],[9,2,2]]
-    }
-)
+}
+d = pd.DataFrame([(event, score) for event, scores in dscr.items() for score in scores], columns=['Event', 'Points Scored'])
 st.write(d)
 
 boxplot2 = alt.Chart(d).mark_boxplot(extent="min-max").encode(
@@ -132,7 +131,7 @@ boxplot2 = alt.Chart(d).mark_boxplot(extent="min-max").encode(
     ).configure_title(
         fontSize=16,
         anchor='start'
-    )
+    ).facet('Event:N', columns=3)
 # Display the boxplot
 st.altair_chart(boxplot2, use_container_width=True)
 
