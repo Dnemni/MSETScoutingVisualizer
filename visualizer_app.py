@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 import tbapy
 import datetime
-from streamlit_echarts import st_echarts
+#from streamlit_echarts import st_echarts
 
 st.title("MSET Scouting Data Visualizer")
 
