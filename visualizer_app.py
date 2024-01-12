@@ -134,10 +134,10 @@ st_echarts(option, height="500px")
 
 """
 st.write(scrdata[0])
-[s, h] = boxplot(scrdata[0])
-"""boxplot = alt.Chart(scrdata[0]).mark_boxplot().encode(
-        x='Category:N',
-        y='Value:Q'
+boxplot = alt.Chart(scrdata[0]).mark_boxplot().encode(
+    alt.X("Origin:N"),
+    alt.Y("Miles_per_Gallon:Q").scale(zero=False),
+    alt.Color("Origin:N").legend(None),
     ).properties(
         width=400,
         height=300
@@ -145,6 +145,5 @@ st.write(scrdata[0])
         fontSize=16,
         anchor='start'
     )
-"""
 # Display the boxplot
 st.altair_chart(boxplot, use_container_width=True)
