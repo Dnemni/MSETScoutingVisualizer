@@ -104,21 +104,21 @@ def getTeamData(team, year, events):
 st.sidebar.title("Select Team")
 
 class SideBarSetup:
-    def tmnumIN(self):
+    def tmnumIN(self, n):
         with st.sidebar:
-            tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
+            tm = st.text_input("Team Number", "649", key = "teamname " + str(n), placeholder = "649")
         return tm
 
-    def tmyrIN(self):
+    def tmyrIN(self, y):
         with st.sidebar:
             tmyrs = getTeamYears(tm)
-            tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
+            tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs " + str(y))
         return tmy
 
-    def tmyrevIN(self):
+    def tmyrevIN(self, e):
         with st.sidebar:
             tyevents = getTeamEvents(tm, tmy)
-            evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
+            evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent " + str(e))
         return evnt
 
 
@@ -131,16 +131,26 @@ class SideBarSetup:
 
     tyevents = getTeamEvents(tm, tmy)
     evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
+    
+    
+    sb1 = SideBarSetup()
+    tm = sb1.tmnumIN()
+    tmy = sb1.tmyrIN()
+    evnt = sb1.tmyrevIN()
+    if st.sidebar.button("Add Team", type="primary"):
+        sb2 = SideBarSetup()
+        tm = sb2.tmnumIN()
+        tmy = sb2.tmyrIN()
+        evnt = sb2.tmyrevIN()
     """
-sb1 = SideBarSetup()
-tm = sb1.tmnumIN()
-tmy = sb1.tmyrIN()
-evnt = sb1.tmyrevIN()
-if st.sidebar.button("Add Team", type="primary"):
-    sb2 = SideBarSetup()
-    tm = sb2.tmnumIN()
-    tmy = sb2.tmyrIN()
-    evnt = sb2.tmyrevIN()
+x = 1
+for i in range(x):
+    sb = SideBarSetup(x)
+    tm = sb.tmnumIN(x)
+    tmy = sb.tmyrIN(x)
+    evnt = sb.tmyrevIN(x)
+    if st.sidebar.button("Add Team", type="primary"):
+        x += 1
         
 
 #Charts
