@@ -114,10 +114,10 @@ boxplot = alt.Chart(df).mark_boxplot(extent="min-max").encode(
 # Display the boxplot
 st.altair_chart(boxplot, use_container_width=True)
 
-d = pd.DataFrame({"Points Scored": [1,2,3,4,5,3,3,6,9,4,7,9,15,3,3], "Event": ["casf", "casf", "casf", "casf", "casf", "casj", "casj", "casj", "casj", "casj", "tur", "tur", "tur", "tur", "tur"]})
+d = pd.DataFrame({"Event": ["casf", "tur", "casj"], "Points Scored": [[3,6,1], [4,8,12], [2,2,2]]})
 st.write(d)
 
-boxplot2 = alt.Chart([d]).mark_boxplot(extent="min-max").encode(
+boxplot2 = alt.Chart([d,d1,d2]).mark_boxplot(extent="min-max").encode(
     alt.X("Event:N"),
     alt.Y("Points Scored:Q").scale(zero=False),
     alt.Color("Origin:N").legend(None),
