@@ -44,6 +44,7 @@ def getscoreinfo(t, y, events):
           else:
             score.append(red_score)
     d[event] = score
+    st.write(d)
   return d
 
 def getTeamEvents(team, yr):
