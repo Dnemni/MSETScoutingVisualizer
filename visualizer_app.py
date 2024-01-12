@@ -131,7 +131,7 @@ boxplot2 = alt.Chart(d).mark_boxplot(extent="min-max").encode(
     ).configure_title(
         fontSize=16,
         anchor='start'
-    ).facet('Event:N', columns=3)
+    )
 # Display the boxplot
 st.altair_chart(boxplot2, use_container_width=True)
 
