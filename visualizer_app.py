@@ -90,7 +90,6 @@ boxplot = alt.Chart(df).mark_boxplot(extent="min-max", size = 50).encode(
     alt.X("Event:N"),
     alt.Y("Points Scored:Q").scale(zero=False),
     alt.Color("Event:N").legend(None),
-    alt.Stroke("Event:N", strokeWidth=2),
     ).properties(
         width=400,
         height=300
