@@ -112,6 +112,9 @@ with st.sidebar:
 
     tyevents = getTeamEvents(tm, tmy)
     evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
+    
+    if st.button("Add Team", type="primary"):
+        st.write("New Team")
 
 #Charts
 tmscrs = getTeamData(tm, tmy, evnt)
