@@ -103,18 +103,20 @@ def getTeamData(team, year, events):
 #Input
 st.sidebar.title("Select Team")
 
+x = 1
 with st.sidebar:
-    tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
+    for i in range(x):
+        tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
 
-    tmyrs = getTeamYears(tm)
-    tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
+        tmyrs = getTeamYears(tm)
+        tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
 
 
-    tyevents = getTeamEvents(tm, tmy)
-    evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
-    
-    if st.button("Add Team", type="primary"):
-        st.write("New Team")
+        tyevents = getTeamEvents(tm, tmy)
+        evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
+        
+        if st.button("Add Team", type="primary"):
+            x += 1
 
 #Charts
 tmscrs = getTeamData(tm, tmy, evnt)
