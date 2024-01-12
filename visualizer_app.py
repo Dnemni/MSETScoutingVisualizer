@@ -97,7 +97,7 @@ for key, scores in evscr.items():
     scrdata.append(dic)
 
 df = pd.DataFrame(scrdata)
-df.drop("A", axis=1)
+df.drop("A", axis=1, inplace = True)
 st.write(df)
 
 boxplot = alt.Chart(df).mark_boxplot(extent="min-max").encode(
