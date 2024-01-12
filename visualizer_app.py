@@ -140,7 +140,7 @@ st_echarts(option, height="500px")
 """
 
 st.write(data)
-boxplot = alt.Chart(data).mark_boxplot().encode(
+boxplot = alt.Chart(data[0]).mark_boxplot().encode(
     alt.X("Origin:N"),
     alt.Y("Miles_per_Gallon:Q").scale(zero=False),
     alt.Color("Origin:N").legend(None),
