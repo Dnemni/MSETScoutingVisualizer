@@ -145,7 +145,7 @@ class SideBarSetup:
     """
 x = 1
 for i in range(x):
-    sb = SideBarSetup(x)
+    sb = SideBarSetup()
     tm = sb.tmnumIN(x)
     tmy = sb.tmyrIN(x)
     evnt = sb.tmyrevIN(x)
