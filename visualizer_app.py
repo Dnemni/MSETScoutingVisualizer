@@ -96,7 +96,7 @@ for key, scores in evscr.items():
     dic = {"Event": key, "Points Scored": sc}
     scrdata.append(dic)
 
-df = data.frame(scrdata)
+df = pd.DataFrame(scrdata)
 
 d = pd.DataFrame({"Event": "casf", "Points Scored": [1,2,3,4,5]})
 #alt.Data(values=[{"Event": "casf", "Points Scored": [1,2,3,4,5]}])
