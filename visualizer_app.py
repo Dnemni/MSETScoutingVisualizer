@@ -101,14 +101,16 @@ def getTeamData(team, year, events):
     return data
 
 #Input
-tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
 
-tmyrs = getTeamYears(tm)
-tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
+with st.sidebar():
+    tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
+
+    tmyrs = getTeamYears(tm)
+    tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
 
 
-tyevents = getTeamEvents(tm, tmy)
-evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
+    tyevents = getTeamEvents(tm, tmy)
+    evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
 
 #Charts
 tmscrs = getTeamData(tm, tmy, evnt)
