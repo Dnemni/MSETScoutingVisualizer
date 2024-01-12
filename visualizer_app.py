@@ -82,6 +82,7 @@ evnt = st.multiselect("Which events do you want to compare", tyevents, [], key =
 #Charts
 tmscrs = getTeamData(tm, tmy, evnt)
 evscr = getscoreinfo(tm, tmy, evnt)
+st.write(evscr)
 data = pd.DataFrame.from_dict(evscr)
 st.write(data)
 scrdata = [[]]
