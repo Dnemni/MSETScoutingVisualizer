@@ -147,7 +147,7 @@ boxplot = alt.Chart(data).mark_boxplot(extent="min-max").encode(
         width=400,
         height=300
     ).configure_title(
-        text = "Team " + str(tm) + " Scoring Boxplots"
+        text = "Team " + str(tm) + " Scoring Boxplots",
         fontSize=16,
         anchor='start'
     )
