@@ -85,6 +85,7 @@ evscr = getscoreinfo(tm, tmy, evnt)
 print(getscoreinfo("649", 2022, ["casf", "casj", "tur"]))
 
 st.write(evscr)
+data = alt.Data(values=evscr)
 scrdata = [[]]
 for key, scores in evscr.items():
     scrdata.append(scores)
@@ -138,7 +139,7 @@ st_echarts(option, height="500px")
 """
 
 
-boxplot = alt.Chart(evscr).mark_boxplot().encode(
+boxplot = alt.Chart(data).mark_boxplot().encode(
     alt.X("Origin:N"),
     alt.Y("Miles_per_Gallon:Q").scale(zero=False),
     alt.Color("Origin:N").legend(None),
