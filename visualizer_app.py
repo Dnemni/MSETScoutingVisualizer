@@ -139,14 +139,15 @@ st_echarts(option, height="500px")
 """
 
 
-boxplot = alt.Chart(data).mark_boxplot().encode(
-    alt.X("Origin:N"),
-    alt.Y("Miles_per_Gallon:Q").scale(zero=False),
+boxplot = alt.Chart(data).mark_boxplot(extent="min-max").encode(
+    alt.X("Event:N"),
+    alt.Y("Points Scored:Q").scale(zero=False),
     alt.Color("Origin:N").legend(None),
     ).properties(
         width=400,
         height=300
     ).configure_title(
+        text = "Team " + str(tm) + " Scoring Boxplots"
         fontSize=16,
         anchor='start'
     )
