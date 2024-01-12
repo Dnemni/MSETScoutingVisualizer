@@ -7,6 +7,37 @@ import datetime
 
 st.title("MSET Scouting Data Visualizer")
 
+st.set_page_config(
+    page_title="MSET Scouting Data Visualizer",
+    page_icon=":chart:",  # You can use any emoji as an icon
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+# Set theme
+theme = {
+    "backgroundColor": "#afc9f7",
+    "secondaryBackgroundColor": "#8f98ea",
+    "textColor": "#000000",
+}
+
+st.markdown(
+    """
+    <style>
+        body {
+            background-color: %(backgroundColor)s;
+        }
+        .secondaryBackgroundColor {
+            background-color: %(secondaryBackgroundColor)s;
+        }
+        .markdown-text-container {
+            color: %(textColor)s;
+        }
+    </style>
+    """ % theme,
+    unsafe_allow_html=True,
+)
+
 #Blue Alliance API Parsing
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
 
