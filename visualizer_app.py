@@ -87,9 +87,8 @@ data = alt.Data(values=evscr)
 scrdata = [{}]
 maxlen = 0
 for key, scores in evscr.items():
-    lnt = len(scores)
-    if(lnt > maxlen):
-        maxlen = len
+    if len(scores) > maxlen:
+        maxlen = len(scores)
 for key, scores in evscr.items():
     sc = c(scores, rep(NA, maxlen - length(scores)))
     dic = {"Event": key, "Points Scored": sc}
