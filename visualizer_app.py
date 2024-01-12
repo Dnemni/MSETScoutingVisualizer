@@ -133,8 +133,9 @@ option = {
 st_echarts(option, height="500px")
 
 """
-st.write(scrdata[0])
-boxplot = alt.Chart(scrdata[0]).mark_boxplot().encode(
+data = pd.DataFrame(evscr)
+st.write(data)
+boxplot = alt.Chart(data).mark_boxplot().encode(
     alt.X("Origin:N"),
     alt.Y("Miles_per_Gallon:Q").scale(zero=False),
     alt.Color("Origin:N").legend(None),
