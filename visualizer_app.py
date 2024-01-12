@@ -83,7 +83,7 @@ evnt = st.multiselect("Which events do you want to compare", tyevents, [], key =
 tmscrs = getTeamData(tm, tmy, evnt)
 evscr = getscoreinfo(tm, tmy, evnt)
 
-data = alt.Data(values=evscr)
+"""data = alt.Data(values=evscr)
 scrdata = [{}]
 maxlen = 0
 for key, scores in evscr.items():
@@ -94,10 +94,9 @@ for key, scores in evscr.items():
     for num in range(maxlen-len(scores)):
         sc.append(None)
     dic = {"Event": key, "Points Scored": sc}
-    scrdata.append(dic)
+    scrdata.append(dic)"""
 
-df = pd.DataFrame(scrdata)
-df.drop(0, axis=0, inplace = True)
+df = pd.DataFrame([(event, score) for event, scores in evscr.items() for score in scores], columns=['Event', 'Points Scored'])
 st.write(df)
 
 boxplot = alt.Chart(df).mark_boxplot(extent="min-max").encode(
