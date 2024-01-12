@@ -133,8 +133,8 @@ option = {
 st_echarts(option, height="500px")
 
 """
-
-boxplot = alt.Chart(scrdata[1]).mark_boxplot().encode(
+st.write(scrdata[0])
+boxplot = alt.Chart(scrdata[0]).mark_boxplot().encode(
         x='Category:N',
         y='Value:Q'
     ).properties(
