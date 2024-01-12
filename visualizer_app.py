@@ -83,26 +83,14 @@ evnt = st.multiselect("Which events do you want to compare", tyevents, [], key =
 tmscrs = getTeamData(tm, tmy, evnt)
 evscr = getscoreinfo(tm, tmy, evnt)
 
-"""data = alt.Data(values=evscr)
-scrdata = [{}]
-maxlen = 0
-for key, scores in evscr.items():
-    if len(scores) > maxlen:
-        maxlen = len(scores)
-for key, scores in evscr.items():
-    sc = scores
-    for num in range(maxlen-len(scores)):
-        sc.append(None)
-    dic = {"Event": key, "Points Scored": sc}
-    scrdata.append(dic)"""
-
 df = pd.DataFrame([(event, score) for event, scores in evscr.items() for score in scores], columns=['Event', 'Points Scored'])
 st.write(df)
 
-boxplot = alt.Chart(df).mark_boxplot(extent="min-max").encode(
+boxplot = alt.Chart(df).mark_boxplot(extent="min-max", size = 50).encode(
     alt.X("Event:N"),
     alt.Y("Points Scored:Q").scale(zero=False),
-    alt.Color("Origin:N").legend(None),
+    alt.Color("Event:N").legend(None),
+    alt.Stroke("Event:N", strokeWidth=2),
     ).properties(
         width=400,
         height=300
@@ -112,26 +100,3 @@ boxplot = alt.Chart(df).mark_boxplot(extent="min-max").encode(
     )
 # Display the boxplot
 st.altair_chart(boxplot, use_container_width=True)
-
-dscr = {
-        "casf": [1,2,3],
-        "casj": [7,1,8],
-        "tur": [9,2,2]
-}
-d = pd.DataFrame([(event, score) for event, scores in dscr.items() for score in scores], columns=['Event', 'Points Scored'])
-st.write(d)
-
-boxplot2 = alt.Chart(d).mark_boxplot(extent="min-max").encode(
-    alt.X("Event:N"),
-    alt.Y("Points Scored:Q").scale(zero=False),
-    alt.Color("Origin:N").legend(None),
-    ).properties(
-        width=400,
-        height=300
-    ).configure_title(
-        fontSize=16,
-        anchor='start'
-    )
-# Display the boxplot
-st.altair_chart(boxplot2, use_container_width=True)
-
