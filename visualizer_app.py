@@ -155,6 +155,7 @@ class SideBarSetup:
     """
 st.header("Score Visualization")
 # Add teams dynamically
+teams_info = []
 x = 1
 while st.sidebar.button("Add Team", type="primary"):
     sb = SideBarSetup()
