@@ -92,13 +92,23 @@ def getTeamData(team, year, events):
     evscr = getscoreinfo(team, year, events)
     data = {}
     for key, scores in evscr.items():
-        q1 = np.percentile(scores, 25)
-        median = np.percentile(scores, 50)
-        q3 = np.percentile(scores, 75)
-        minimum = np.min(scores)
-        maximum = np.max(scores)
-        data.update({key:[q1, median, q3, minimum, maximum]})
+        try:
+            q1 = np.percentile(scores, 25)
+            median = np.percentile(scores, 50)
+            q3 = np.percentile(scores, 75)
+            minimum = np.min(scores)
+            maximum = np.max(scores)
+            data.update({key:[q1, median, q3, minimum, maximum]})
+        except:
+            st.error("No data. Try a different year.")
+            st.stop()
     return data
+
+def checkTeamValidity(team):
+    allteams = np.load("teamnumbers.npy")
+    if team in allteams:
+        return True
+    return False
 
 #Input
 st.sidebar.title("Select Team")
@@ -143,6 +153,7 @@ class SideBarSetup:
         tmy = sb2.tmyrIN()
         evnt = sb2.tmyrevIN()
     """
+st.header("Score Visualization")
 x = 1
 sblist = []
 for i in range(x):
@@ -175,3 +186,12 @@ boxplot = alt.Chart(df).mark_boxplot(extent="min-max", size = 50).encode(
     )
 # Display the boxplot
 st.altair_chart(boxplot, use_container_width=True)
+
+st.header("Awards & Stats")
+awards = tba.team_awards(int(tm), int(tmy))
+if len(awards) == 0:
+    st.write('In %d, team won no awards.' % (tmy))
+elif len(awards) == 1:
+    st.write('In %d, team won %d award, award list: %s.' % (tmy, len(awards), ", ".join('%s (%s)' % (award.name, award.event_key) for award in awards)))
+else:
+    st.write('In %d, team won %d awards, award list: %s.' % (tmy, len(awards), ", ".join('%s (%s)' % (award.name, award.event_key) for award in awards)))
