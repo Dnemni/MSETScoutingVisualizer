@@ -159,15 +159,15 @@ st.header("Score Visualization")
 sb1 = SideBarSetup()
 tm1 = sb1.tmnumIN(0)
 tmy1 = sb1.tmyrIN(0, tm1)
-evnt1 = sb1.tmyrevIN(0, tmy1)
+evnt1 = sb1.tmyrevIN(0, tm1, tmy1)
 teams_info.append((tm1, tmy1, evnt1))
 teams_info = []
 x = 1
 while st.sidebar.button(f"Add Team {x}", type="primary", key=f"add_team_{x}"):
     sb = SideBarSetup()
     tm = sb.tmnumIN(x)
-    tmy = sb.tmyrIN(x)
-    evnt = sb.tmyrevIN(x)
+    tmy = sb.tmyrIN(x, tm)
+    evnt = sb.tmyrevIN(x, tm, tmy)
     teams_info.append((tm, tmy, evnt))
     x += 1
 
