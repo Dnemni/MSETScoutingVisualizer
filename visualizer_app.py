@@ -175,7 +175,7 @@ for idx, (tm, tmy, evnt) in enumerate(teams_info):
 
 with tab1:
     st.header("Score Visualization")
-    """
+    temp = """
     x = 1
     teams_info = []
     sbslist = []
