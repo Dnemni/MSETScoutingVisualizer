@@ -154,7 +154,7 @@ class SideBarSetup:
         evnt = sb2.tmyrevIN()
     """
 st.header("Score Visualization")
-
+"""
 # Add teams dynamically
 teams_info = []
 sb1 = SideBarSetup()
@@ -197,7 +197,7 @@ for idx, (tm, tmy, evnt) in enumerate(teams_info):
     st.sidebar.text(f"Team Number: {tm}")
     st.sidebar.text(f"Year: {tmy}")
     st.sidebar.text(f"Events: {', '.join(evnt)}")
-"""
+
 
 #Charts
 tmscrs = getTeamData(tm, tmy, evnt)
