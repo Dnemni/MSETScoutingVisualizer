@@ -156,9 +156,9 @@ class SideBarSetup:
 st.header("Score Visualization")
 # Add teams dynamically
 sb1 = SideBarSetup()
-tm1 = sb1.tmnumIN()
-tmy1 = sb1.tmyrIN()
-evnt1 = sb1.tmyrevIN()
+tm1 = sb1.tmnumIN(0)
+tmy1 = sb1.tmyrIN(0)
+evnt1 = sb1.tmyrevIN(0)
 teams_info.append((tm1, tmy1, evnt1))
 teams_info = []
 x = 1
