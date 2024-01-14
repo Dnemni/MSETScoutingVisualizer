@@ -165,10 +165,10 @@ teams_info.append((tm1, tmy1, evnt1))
 x = 1
 while st.sidebar.button("Add Team", type="primary", key="add_team"):
     sb = SideBarSetup()
-    globals()[tm + x] = sb.tmnumIN(x)
-    globals()[tmy + x] = sb.tmyrIN(x, globals()[tm + x])
-    globals()[evnt + x] = sb.tmyrevIN(x, globals()[tm + x], globals()[tmy + x])
-    teams_info.append((globals()[tm + x], globals()[tmy + x], globals()[evnt + x]))
+    globals()["tm" + str(x)] = sb.tmnumIN(x)
+    globals()["tmy" + str(x)] = sb.tmyrIN(x, globals()["tm" + str(x)])
+    globals()["evnt" + str(x)] = sb.tmyrevIN(x, globals()["tm" + str(x)], globals()["tmy" + str(x)])
+    teams_info.append((globals()["tm" + str(x)], globals()["tmy" + str(x)], globals()["evnt" + str(x)]))
     x += 1
 st.write(x)
 st.write(teams_info)
