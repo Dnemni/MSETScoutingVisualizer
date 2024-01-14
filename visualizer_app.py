@@ -155,6 +155,11 @@ class SideBarSetup:
     """
 st.header("Score Visualization")
 # Add teams dynamically
+sb1 = SideBarSetup()
+tm1 = sb1.tmnumIN()
+tmy1 = sb1.tmyrIN()
+evnt1 = sb1.tmyrevIN()
+teams_info.append((tm1, tmy1, evnt1))
 teams_info = []
 x = 1
 while st.sidebar.button(f"Add Team {x}", type="primary", key=f"add_team_{x}"):
@@ -185,8 +190,8 @@ for i in range(x):
 """
 
 #Charts
-tmscrs = getTeamData(teams_info[0][0], teams_info[0][1], teams_info[0][2])
-evscr = getscoreinfo(teams_info[0][0], teams_info[0][1], teams_info[0][2])
+tmscrs = getTeamData(tm1, tmy1, evnt1)
+evscr = getscoreinfo(tm1, tmy1, evnt1)
 
 df = pd.DataFrame([(event, score) for event, scores in evscr.items() for score in scores], columns=['Event', 'Points Scored'])
 
