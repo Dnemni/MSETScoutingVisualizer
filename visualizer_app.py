@@ -154,10 +154,11 @@ class SideBarSetup:
         evnt = sb2.tmyrevIN()
     """
 st.header("Score Visualization")
+"""
 # Add teams dynamically
 sb1 = SideBarSetup()
-tm1 = sb1.tmnumIN(0)
-tmy1 = sb1.tmyrIN(0)
+tm1 = sb1.tmnumIN("649")
+tmy1 = sb1.tmyrIN()
 evnt1 = sb1.tmyrevIN(0)
 teams_info.append((tm1, tmy1, evnt1))
 teams_info = []
@@ -187,7 +188,7 @@ for i in range(x):
     if st.sidebar.button("Add Team", type="primary"):
         x += 1
     sbslist.append(sb)
-"""
+
 
 #Charts
 tmscrs = getTeamData(tm1, tmy1, evnt1)
