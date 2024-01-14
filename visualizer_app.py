@@ -146,7 +146,11 @@ teams_info.append((tm0, tmy0, evnt0))
 sblist.append(sb0)
 x = 1
 
-while st.sidebar.button("Add Team", type="primary", key=f"add_team_{x}"):
+buttonClick = 1
+if st.sidebar.button("Add Team", type="primary", key=f"add_team_{x}"):
+    buttonClick += 1
+
+for i in range (buttonClick):
     globals()["sb" + str(x)] = SideBarSetup()
     globals()["tm" + str(x)] = globals()["sb" + str(x)].tmnumIN(x)
     globals()["tmy" + str(x)] = globals()["sb" + str(x)].tmyrIN(x, globals()["tm" + str(x)])
