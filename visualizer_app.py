@@ -132,27 +132,6 @@ class SideBarSetup:
         return evnt
 
 
-#with st.sidebar:
-    """tm = st.text_input("Team Number", "649", key = "teamname", placeholder = "649")
-
-    tmyrs = getTeamYears(tm)
-    tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs")
-
-
-    tyevents = getTeamEvents(tm, tmy)
-    evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent")
-    
-    
-    sb1 = SideBarSetup()
-    tm = sb1.tmnumIN()
-    tmy = sb1.tmyrIN()
-    evnt = sb1.tmyrevIN()
-    if st.sidebar.button("Add Team", type="primary"):
-        sb2 = SideBarSetup()
-        tm = sb2.tmnumIN()
-        tmy = sb2.tmyrIN()
-        evnt = sb2.tmyrevIN()
-    """
 tab1, tab2, tab3 = st.tabs(["Plots", "Awards", "Blank (pictures?)"])
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
 
@@ -193,13 +172,6 @@ with tab1:
         if st.sidebar.button("Add Team", type="primary"):
             x += 1
         sbslist.append(sb)
-
-    # Display information for each team
-    for idx, (tm, tmy, evnt) in enumerate(teams_info):
-        st.sidebar.header(f"Team {idx + 1} Information")
-        st.sidebar.text(f"Team Number: {tm}")
-        st.sidebar.text(f"Year: {tmy}")
-        st.sidebar.text(f"Events: {', '.join(evnt)}")
 """
 
 #Charts
