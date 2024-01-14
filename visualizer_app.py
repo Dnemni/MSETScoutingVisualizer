@@ -137,19 +137,22 @@ tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOY
 
 # Add teams dynamically
 teams_info = []
-sb1 = SideBarSetup()
-tm1 = sb1.tmnumIN(0)
-tmy1 = sb1.tmyrIN(0, tm1)
-evnt1 = sb1.tmyrevIN(0, tm1, tmy1)
-teams_info.append((tm1, tmy1, evnt1))
+sblist = []
+sb0 = SideBarSetup()
+tm0 = sb0.tmnumIN(0)
+tmy0 = sb0.tmyrIN(0, tm0)
+evnt0 = sb0.tmyrevIN(0, tm0, tmy0)
+teams_info.append((tm0, tmy0, evnt0))
+sblist.append(sb0)
 x = 1
 
 while st.sidebar.button("Add Team", type="primary", key=f"add_team_{x}"):
-    sb = SideBarSetup()
-    globals()["tm" + str(x)] = sb.tmnumIN(x)
-    globals()["tmy" + str(x)] = sb.tmyrIN(x, globals()["tm" + str(x)])
-    globals()["evnt" + str(x)] = sb.tmyrevIN(x, globals()["tm" + str(x)], globals()["tmy" + str(x)])
+    globals()["sb" + str(x)] = SideBarSetup()
+    globals()["tm" + str(x)] = globals()["sb" + str(x)].tmnumIN(x)
+    globals()["tmy" + str(x)] = globals()["sb" + str(x)].tmyrIN(x, globals()["tm" + str(x)])
+    globals()["evnt" + str(x)] = globals()["sb" + str(x)].tmyrevIN(x, globals()["tm" + str(x)], globals()["tmy" + str(x)])
     teams_info.append((globals()["tm" + str(x)], globals()["tmy" + str(x)], globals()["evnt" + str(x)]))
+    sblist.append(globals()["sb" + str(x)])
     x += 1
     
 # Display information for each team
