@@ -114,21 +114,21 @@ def checkTeamValidity(team):
 st.sidebar.title("Select Team")
 
 class SideBarSetup:
-    def tmnumIN(self, n):
+    def tmnumIN(self, a):
         with st.sidebar:
-            tm = st.text_input("Team Number", "649", key = "teamname " + str(n), placeholder = "649")
-        return tm
+            t = st.text_input("Team Number", "649", key = "teamname " + str(a), placeholder = "649")
+        return t
 
-    def tmyrIN(self, y):
+    def tmyrIN(self, b, t):
         with st.sidebar:
-            tmyrs = getTeamYears(tm)
-            tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs " + str(y))
+            tmyrs = getTeamYears(t)
+            tmy = st.selectbox("Which year do you want to check", tmyrs, key = "teamyrs " + str(b))
         return tmy
 
-    def tmyrevIN(self, e):
+    def tmyrevIN(self, c, t, y):
         with st.sidebar:
-            tyevents = getTeamEvents(tm, tmy)
-            evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent " + str(e))
+            tyevents = getTeamEvents(t, y)
+            evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent " + str(c))
         return evnt
 
 
@@ -182,17 +182,17 @@ x = 1
 sbslist = []
 for i in range(x):
     sb = SideBarSetup()
-    tm1 = sb.tmnumIN(x)
-    tmy1 = sb.tmyrIN(x)
-    evnt1 = sb.tmyrevIN(x)
+    tm = sb.tmnumIN(x)
+    tmy = sb.tmyrIN(x, tm)
+    evnt = sb.tmyrevIN(x, tm, tmy)
     if st.sidebar.button("Add Team", type="primary"):
         x += 1
     sbslist.append(sb)
 
 
 #Charts
-tmscrs = getTeamData(tm1, tmy1, evnt1)
-evscr = getscoreinfo(tm1, tmy1, evnt1)
+tmscrs = getTeamData(tm, tmy, evnt)
+evscr = getscoreinfo(tm, tmy, evnt)
 
 df = pd.DataFrame([(event, score) for event, scores in evscr.items() for score in scores], columns=['Event', 'Points Scored'])
 
