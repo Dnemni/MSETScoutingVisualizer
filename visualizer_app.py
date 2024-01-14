@@ -179,16 +179,24 @@ for idx, (tm, tmy, evnt) in enumerate(teams_info):
     st.sidebar.text(f"Events: {', '.join(evnt)}")
 """
 x = 1
+teams_info = []
 sbslist = []
 for i in range(x):
     sb = SideBarSetup()
     tm = sb.tmnumIN(x)
     tmy = sb.tmyrIN(x, tm)
     evnt = sb.tmyrevIN(x, tm, tmy)
+    teams_info.append((tm, tmy, evnt))
     if st.sidebar.button("Add Team", type="primary"):
         x += 1
     sbslist.append(sb)
 
+# Display information for each team
+for idx, (tm, tmy, evnt) in enumerate(teams_info):
+    st.sidebar.header(f"Team {idx + 1} Information")
+    st.sidebar.text(f"Team Number: {tm}")
+    st.sidebar.text(f"Year: {tmy}")
+    st.sidebar.text(f"Events: {', '.join(evnt)}")
 
 #Charts
 tmscrs = getTeamData(tm, tmy, evnt)
