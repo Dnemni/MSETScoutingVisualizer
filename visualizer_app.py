@@ -182,17 +182,17 @@ x = 1
 sbslist = []
 for i in range(x):
     sb = SideBarSetup()
-    tm = sb.tmnumIN(x)
-    tmy = sb.tmyrIN(x)
-    evnt = sb.tmyrevIN(x)
+    tm1 = sb.tmnumIN(x)
+    tmy1 = sb.tmyrIN(x)
+    evnt1 = sb.tmyrevIN(x)
     if st.sidebar.button("Add Team", type="primary"):
         x += 1
     sbslist.append(sb)
 
 
 #Charts
-tmscrs = getTeamData(tm, tmy, evnt)
-evscr = getscoreinfo(tm, tmy, evnt)
+tmscrs = getTeamData(tm1, tmy1, evnt1)
+evscr = getscoreinfo(tm1, tmy1, evnt1)
 
 df = pd.DataFrame([(event, score) for event, scores in evscr.items() for score in scores], columns=['Event', 'Points Scored'])
 
