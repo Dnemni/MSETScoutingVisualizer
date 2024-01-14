@@ -185,8 +185,8 @@ for i in range(x):
 """
 
 #Charts
-tmscrs = getTeamData(tm, tmy, evnt)
-evscr = getscoreinfo(tm, tmy, evnt)
+tmscrs = getTeamData(teams_info[0][0], teams_info[0][1], teams_info[0][2])
+evscr = getscoreinfo(teams_info[0][0], teams_info[0][1], teams_info[0][2])
 
 df = pd.DataFrame([(event, score) for event, scores in evscr.items() for score in scores], columns=['Event', 'Points Scored'])
 
