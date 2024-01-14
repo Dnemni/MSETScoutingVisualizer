@@ -157,7 +157,7 @@ st.header("Score Visualization")
 # Add teams dynamically
 teams_info = []
 x = 1
-while st.sidebar.button("Add Team", type="primary"):
+while st.sidebar.button(f"Add Team {x}", type="primary", key=f"add_team_{x}"):
     sb = SideBarSetup()
     tm = sb.tmnumIN(x)
     tmy = sb.tmyrIN(x)
