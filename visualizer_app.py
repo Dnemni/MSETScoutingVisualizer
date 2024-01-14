@@ -174,8 +174,6 @@ with tab1:
         globals()["evnt" + str(x)] = sb.tmyrevIN(x, globals()["tm" + str(x)], globals()["tmy" + str(x)])
         teams_info.append((globals()["tm" + str(x)], globals()["tmy" + str(x)], globals()["evnt" + str(x)]))
         x += 1
-    st.write(x)
-    st.write(teams_info)
     # Display information for each team
     for idx, (tm, tmy, evnt) in enumerate(teams_info):
         st.sidebar.header(f"Team {idx + 1} Information")
