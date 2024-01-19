@@ -114,7 +114,7 @@ def checkTeamValidity(team):
 st.sidebar.title("Select Team")
 
 class SideBarSetup:
-    def __init__(self):
+    def bar(self):
         st.sidebar.header("----------")
     
     def tmnumIN(self, a):
@@ -175,6 +175,7 @@ if st.sidebar.button("Add Team", type="primary", key=f"add_team_{x}"):
 
 for i in range (st.session_state.buttonClick):
     globals()["sb" + str(x)] = SideBarSetup()
+    globals()["sb" + str(x)].bar()
     globals()["tm" + str(x)] = globals()["sb" + str(x)].tmnumIN(x)
     globals()["tmy" + str(x)] = globals()["sb" + str(x)].tmyrIN(x, globals()["tm" + str(x)])
     globals()["evnt" + str(x)] = globals()["sb" + str(x)].tmyrevIN(x, globals()["tm" + str(x)], globals()["tmy" + str(x)])
