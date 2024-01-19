@@ -166,9 +166,10 @@ def individualTeamScatterPlot(scores_data):
             ).properties(
                 width=200,
                 height=300
-            ).configure_title(
+            """).configure_title(
                 fontSize=16,
                 anchor='start'
+                """
             )
 
         # Combine scatter plot and line of best fit
