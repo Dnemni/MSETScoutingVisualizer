@@ -160,12 +160,16 @@ def individualTeamScatterPlot(scores_data):
 
         # Create scatter plot
         scatter_plot = alt.Chart(data).mark_circle().encode(
-            x='Match:O',
-            y='Score:Q',
-            tooltip=['Match', 'Score']
-        ).properties(
-            title=f'Team {team} - Event {event} Match Scores'
-        )
+            alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
+            alt.Y("Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
+            alt.Color("Match:N").legend(None),
+            ).properties(
+                width=200,
+                height=300
+            ).configure_title(
+                fontSize=16,
+                anchor='start'
+            )
 
         # Add a line of best fit
         reg = LinearRegression().fit(data[['Match']], data['Score'])
