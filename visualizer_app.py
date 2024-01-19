@@ -224,7 +224,7 @@ with tab1:
         basicTeamBoxPlot(evscr)
         
         st.write("Team " + str(tm) + "Predicted vs Actual Scores Scatterplot")
-        individualTeamScatterplot(evscr)
+        individualTeamScatterPlot(evscr)
 
 with tab2:
     st.header("Awards & Stats")
