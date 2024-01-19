@@ -165,12 +165,11 @@ def individualTeamScatterPlot(scores_data):
             alt.Color("Match:N").legend(None),
             ).properties(
                 width=200,
-                height=300)
-            """).configure_title(
-                fontSize=16,
-                anchor='start'
-                """
-            
+                height=300
+            #).configure_title(
+            #    fontSize=16,
+            #    anchor='start'
+            )
 
         # Combine scatter plot and line of best fit
         line_of_fit = scatter_plot.transform_regression('Match','Points Scored').mark_line()
