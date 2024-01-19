@@ -160,8 +160,6 @@ def individualTeamScatterPlot(scores_data):
 
         # Create scatter plot
         scatter_plot = alt.Chart(data).mark_circle().encode(
-            x = "Match",
-            y = "Points Scored",
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
             alt.Y("Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
             alt.Color("Match:N").legend(None),
