@@ -172,7 +172,7 @@ def individualTeamScatterPlot(scores_data):
             )
 
         # Combine scatter plot and line of best fit
-        chart = scatter_plot + scatter_plot.transform_regression('temp_max','temp_min').mark_line()
+        chart = scatter_plot + scatter_plot.transform_regression('Match','Points Scored').mark_line()
 
         # Display the chart
         st.altair_chart(chart, use_container_width=True)
