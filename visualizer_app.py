@@ -114,7 +114,7 @@ def checkTeamValidity(team):
 st.sidebar.title("Select Team")
 
 class SideBarSetup:
-    def ___init___(self):
+    def __init__(self):
         st.sidebar.headline("----------")
     
     def tmnumIN(self, a):
