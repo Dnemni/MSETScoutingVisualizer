@@ -152,7 +152,6 @@ def basicTeamBoxPlot(tmevscr):
     # Display the boxplot
     st.altair_chart(boxplot, use_container_width=True)
 
-tab1, tab2, tab3 = st.tabs(["Plots", "Awards", "Blank (pictures?)"])
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
 
 # Add teams dynamically
@@ -170,8 +169,10 @@ if 'buttonClick' not in st.session_state:
     st.session_state.buttonClick = 0
 
 #buttonClick = 0
-if st.sidebar.button("Add Team", type="primary", key=f"add_team_{x}"):
+if st.button("Add Team", type="primary", key=f"add_team_{x}"):
     st.session_state.buttonClick += 1
+
+tab1, tab2, tab3 = st.tabs(["Plots", "Awards", "Blank (pictures?)"])
 
 for i in range (st.session_state.buttonClick):
     globals()["sb" + str(x)] = SideBarSetup()
