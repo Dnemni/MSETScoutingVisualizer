@@ -151,6 +151,35 @@ def basicTeamBoxPlot(tmevscr):
         )
     # Display the boxplot
     st.altair_chart(boxplot, use_container_width=True)
+    
+def individualTeamScatterPlot(scores_data):
+    
+    for event, scores in scores_data.items():
+        # Prepare data for scatter plot
+        data = pd.DataFrame({'Match': range(1, len(scores) + 1), 'Score': scores})
+
+        # Create scatter plot
+        scatter_plot = alt.Chart(data).mark_circle().encode(
+            x='Match:O',
+            y='Score:Q',
+            tooltip=['Match', 'Score']
+        ).properties(
+            title=f'Team {team} - Event {event} Match Scores'
+        )
+
+        # Add a line of best fit
+        reg = LinearRegression().fit(data[['Match']], data['Score'])
+        line_of_best_fit = alt.Chart(pd.DataFrame({'Match': [0, len(scores) + 1]})).mark_line(color='red').encode(
+            x='Match:O',
+            y=alt.Y('y:Q', title='Score'),
+        ).transform_calculate(y=f'{reg.coef_[0]:.2f} * datum.Match + {reg.intercept_:.2f}')
+
+        # Combine scatter plot and line of best fit
+        chart = scatter_plot + line_of_best_fit
+
+        # Display the chart
+        st.altair_chart(chart, use_container_width=True)
+
 
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
 
@@ -190,7 +219,12 @@ with tab1:
     # Display charts for each team
     for idx, (tm, tmy, evnt) in enumerate(teams_info):
         evscr = getscoreinfo(tm, tmy, evnt)
+        
+        st.write("Team " + str(tm) + " Event Scores Boxplot")
         basicTeamBoxPlot(evscr)
+        
+        st.write("Team " + str(tm) + "Predicted vs Actual Scores Scatterplot")
+        individualTeamScatterplot(evscr)
 
 with tab2:
     st.header("Awards & Stats")
