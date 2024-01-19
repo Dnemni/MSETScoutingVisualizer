@@ -115,7 +115,7 @@ st.sidebar.title("Select Team")
 
 class SideBarSetup:
     def __init__(self):
-        st.sidebar.headline("----------")
+        st.sidebar.header("----------")
     
     def tmnumIN(self, a):
         with st.sidebar:
