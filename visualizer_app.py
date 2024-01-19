@@ -131,6 +131,23 @@ class SideBarSetup:
             evnt = st.multiselect("Which events do you want to compare", tyevents, [], key = "teamevent " + str(c))
         return evnt
 
+def basicTeamBoxPlot(tmevscr):
+    #Charts
+    df = pd.DataFrame([(event, score) for event, scores in tmevscr.items() for score in scores], columns=['Event', 'Points Scored'])
+
+    boxplot = alt.Chart(df).mark_boxplot(extent="min-max", size = 50).encode(
+        alt.X("Event:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
+        alt.Y("Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
+        alt.Color("Event:N").legend(None),
+        ).properties(
+            width=400,
+            height=300
+        ).configure_title(
+            fontSize=16,
+            anchor='start'
+        )
+    # Display the boxplot
+    st.altair_chart(boxplot, use_container_width=True)
 
 tab1, tab2, tab3 = st.tabs(["Plots", "Awards", "Blank (pictures?)"])
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
@@ -166,32 +183,11 @@ for i in range (st.session_state.buttonClick):
 st.write(sblist)
 st.write(teams_info)
 
-# Display information for each team
-for idx, (tm, tmy, evnt) in enumerate(teams_info):
-    st.sidebar.header(f"Team {idx + 1} Information")
-    st.sidebar.text(f"Team Number: {tm}")
-    st.sidebar.text(f"Year: {tmy}")
-    st.sidebar.text(f"Events: {', '.join(evnt)}")
-
 with tab1:
     st.header("Score Visualization")
-    temp = """
-    x = 1
-    teams_info = []
-    sbslist = []
-    for i in range(x):
-        sb = SideBarSetup()
-        tm = sb.tmnumIN(x)
-        tmy = sb.tmyrIN(x, tm)
-        evnt = sb.tmyrevIN(x, tm, tmy)
-        teams_info.append((tm, tmy, evnt))
-        if st.sidebar.button("Add Team", type="primary"):
-            x += 1
-        sbslist.append(sb)
-"""
 
-#Charts
-    tmscrs = getTeamData(tm, tmy, evnt)
+    #Charts
+    """tmscrs = getTeamData(tm, tmy, evnt)
     evscr = getscoreinfo(tm, tmy, evnt)
 
     df = pd.DataFrame([(event, score) for event, scores in evscr.items() for score in scores], columns=['Event', 'Points Scored'])
@@ -209,6 +205,15 @@ with tab1:
         )
     # Display the boxplot
     st.altair_chart(boxplot, use_container_width=True)
+    """
+    # Display information for each team
+    for idx, (tm, tmy, evnt) in enumerate(teams_info):
+        st.sidebar.header(f"Team {idx + 1} Information")
+        st.sidebar.text(f"Team Number: {tm}")
+        st.sidebar.text(f"Year: {tmy}")
+        st.sidebar.text(f"Events: {', '.join(evnt)}")
+        evscr = getscoreinfo(tm, tmy, evnt)
+        basicTeamBoxPlot(evscr)
 
 with tab2:
     st.header("Awards & Stats")
