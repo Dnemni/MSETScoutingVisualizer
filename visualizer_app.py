@@ -4,7 +4,6 @@ import pandas as pd
 import streamlit as st
 import tbapy
 import datetime
-from sklearn.linear_model import LinearRegression
 
 st.set_page_config(
     page_title="MSET Scouting Data Visualizer",
@@ -172,15 +171,8 @@ def individualTeamScatterPlot(scores_data):
                 anchor='start'
             )
 
-        # Add a line of best fit
-        reg = LinearRegression().fit(data[['Match']], data['Score'])
-        line_of_best_fit = alt.Chart(pd.DataFrame({'Match': [0, len(scores) + 1]})).mark_line(color='red').encode(
-            x='Match:O',
-            y=alt.Y('y:Q', title='Score'),
-        ).transform_calculate(y=f'{reg.coef_[0]:.2f} * datum.Match + {reg.intercept_:.2f}')
-
         # Combine scatter plot and line of best fit
-        chart = scatter_plot + line_of_best_fit
+        chart = scatter_plot + scatter_plot.transform_regression('temp_max','temp_min').mark_line()
 
         # Display the chart
         st.altair_chart(chart, use_container_width=True)
