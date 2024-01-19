@@ -114,6 +114,9 @@ def checkTeamValidity(team):
 st.sidebar.title("Select Team")
 
 class SideBarSetup:
+    def ___init___(self):
+        st.sidebar.headline("----------")
+    
     def tmnumIN(self, a):
         with st.sidebar:
             t = st.text_input("Team Number", "649", key = "teamname " + str(a), placeholder = "649")
@@ -169,7 +172,6 @@ if 'buttonClick' not in st.session_state:
 #buttonClick = 0
 if st.sidebar.button("Add Team", type="primary", key=f"add_team_{x}"):
     st.session_state.buttonClick += 1
-st.write(st.session_state.buttonClick)
 
 for i in range (st.session_state.buttonClick):
     globals()["sb" + str(x)] = SideBarSetup()
@@ -180,38 +182,11 @@ for i in range (st.session_state.buttonClick):
     sblist.append(globals()["sb" + str(x)])
     x += 1
 
-st.write(sblist)
-st.write(teams_info)
-
 with tab1:
     st.header("Score Visualization")
-
-    #Charts
-    """tmscrs = getTeamData(tm, tmy, evnt)
-    evscr = getscoreinfo(tm, tmy, evnt)
-
-    df = pd.DataFrame([(event, score) for event, scores in evscr.items() for score in scores], columns=['Event', 'Points Scored'])
-
-    boxplot = alt.Chart(df).mark_boxplot(extent="min-max", size = 50).encode(
-        alt.X("Event:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
-        alt.Y("Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
-        alt.Color("Event:N").legend(None),
-        ).properties(
-            width=400,
-            height=300
-        ).configure_title(
-            fontSize=16,
-            anchor='start'
-        )
-    # Display the boxplot
-    st.altair_chart(boxplot, use_container_width=True)
-    """
-    # Display information for each team
+    
+    # Display charts for each team
     for idx, (tm, tmy, evnt) in enumerate(teams_info):
-        st.sidebar.header(f"Team {idx + 1} Information")
-        st.sidebar.text(f"Team Number: {tm}")
-        st.sidebar.text(f"Year: {tmy}")
-        st.sidebar.text(f"Events: {', '.join(evnt)}")
         evscr = getscoreinfo(tm, tmy, evnt)
         basicTeamBoxPlot(evscr)
 
