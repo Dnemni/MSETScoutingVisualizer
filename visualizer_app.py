@@ -4,6 +4,7 @@ import pandas as pd
 import streamlit as st
 import tbapy
 import datetime
+from sklearn.linear_model import LinearRegression
 
 st.set_page_config(
     page_title="MSET Scouting Data Visualizer",
