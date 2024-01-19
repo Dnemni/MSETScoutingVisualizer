@@ -2,3 +2,4 @@ altair
 pandas
 tbapy
 streamlit
+sklearn
