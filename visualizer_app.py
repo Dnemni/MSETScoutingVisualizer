@@ -71,9 +71,9 @@ def getscoreinfo(t, y, events):
             teamcode = "frc"+str(t)
             if eventChosen == (str(y) + event):
                 if teamcode in blue_teams:
-                    score[0].append(blue_score)                
+                    score.append(blue_score)                
                 else:
-                    score[0].append(red_score)
+                    score.append(red_score)
         d[event] = score
     return d
 
