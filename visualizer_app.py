@@ -60,7 +60,9 @@ def getscoreinfo(t, y, events):
     d = {}
     for event in events:
         matches = tba.team_matches(team="frc"+str(t), year=y)
-        score = []
+        playoffs = tba.event_predictions(str(y) + event)["match_predictions"]["playoff"]
+        quals = tba.event_predictions(str(y) + event)["match_predictions"]["qual"]
+        scorePrd = [][]
         for alliance in matches:
             blue_score = alliance['alliances']['blue']['score']
             blue_teams = alliance['alliances']['blue']['team_keys']
@@ -71,10 +73,22 @@ def getscoreinfo(t, y, events):
             teamcode = "frc"+str(t)
             if eventChosen == (str(y) + event):
                 if teamcode in blue_teams:
-                    score.append(blue_score)
+                    scorePrd[0].append(blue_score)
+                    for keys in playoffs:
+                        if(keys == alliance['key']):
+                            scorePrd[1].append(playoffs[keys]["blue"]["score"])
+                    for keys in quals:
+                        if(keys == alliance['key']):
+                            scorePrd[1].append(quals[keys]["blue"]["score"])
                 else:
-                    score.append(red_score)
-        d[event] = score
+                    scorePrd[0].append(red_score)
+                    for keys in playoffs:
+                        if(keys == alliance['key']):
+                            scorePrd[1].append(playoffs[keys]["red"]["score"])
+                    for keys in quals:
+                        if(keys == alliance['key']):
+                            scorePrd[1].append(quals[keys]["red"]["score"])
+        d[event] = scorePrd
     return d
 
 def getTeamEvents(team, yr):
