@@ -62,7 +62,7 @@ def getscoreinfo(t, y, events):
         matches = tba.team_matches(team="frc"+str(t), year=y)
         playoffs = tba.event_predictions(str(y) + event)["match_predictions"]["playoff"]
         quals = tba.event_predictions(str(y) + event)["match_predictions"]["qual"]
-        scorePrd = [][]
+        scorePrd = [[],[]]
         for alliance in matches:
             blue_score = alliance['alliances']['blue']['score']
             blue_teams = alliance['alliances']['blue']['team_keys']
