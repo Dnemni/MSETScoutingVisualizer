@@ -192,10 +192,10 @@ def individualTeamScatterPlot(scores_data):
     
     for event, scores in scores_data.items():
         # Prepare data for scatter plot
-        data = pd.DataFrame({'Match': range(1, len(scores) + 1), 'Score': scores})
+        data = pd.DataFrame({'Match': range(1, len(scores) + 1), 'Points Scored': scores})
 
         # Create scatter plot
-        scatter_plot = alt.Chart(data).mark_circle().encode(
+        scatter_plot = alt.Chart(data).mark_circle(size=60).encode(
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
             alt.Y("Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
             alt.Color("Match:N").legend(None),
