@@ -192,19 +192,18 @@ def individualTeamScatterPlot(scores_data):
     
     for event, scores in scores_data.items():
         # Prepare data for scatter plot
-        data = pd.DataFrame({'Match': range(1, len(scores) + 1), 'Points Scored': scores})
+        data = pd.DataFrame({'Match': range(1, len(scores) + 1), 'Actual Points Scored': scores[0], 'Predicted Points Scored': scores[1]})
 
         # Create scatter plot
         scatter_plot = alt.Chart(data).mark_circle(size=60).encode(
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
             alt.Y("Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
-            alt.Color("Red").legend(None),
+            alt.Color("variable:N", legend=alt.Legend(title="Score Type"),
             ).properties(
                 width=200,
                 height=300
-            #).configure_title(
-            #    fontSize=16,
-            #    anchor='start'
+            ).configure_legend(
+                orient='right'
             )
 
         # Combine scatter plot and line of best fit
@@ -254,12 +253,13 @@ with tab1:
     # Display charts for each team
     for idx, (tm, tmy, evnt) in enumerate(teams_info):
         evscr = getscoreinfo(tm, tmy, evnt)
+        nevscr = getscoreinfoNew(tm, tmy, evnt)
         
         st.write("Team " + str(tm) + " Event Scores Boxplot")
         basicTeamBoxPlot(evscr)
         
         st.write("Team " + str(tm) + "Predicted vs Actual Scores Scatterplot")
-        individualTeamScatterPlot(evscr)
+        individualTeamScatterPlot(nevscr)
 
 with tab2:
     st.header("Awards & Stats")
