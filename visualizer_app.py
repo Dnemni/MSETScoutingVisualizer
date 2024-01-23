@@ -191,9 +191,15 @@ def basicTeamBoxPlot(tmevscr):
 def individualTeamScatterPlot(scores_data):
     
     for event, scores in scores_data.items():
+        min_length = min(len(scores[0]), len(scores[1]))
+    
         # Prepare data for scatter plot
-        data = pd.DataFrame({'Match': range(1, len(scores) + 1), 'Actual Points Scored': scores[0], 'Predicted Points Scored': scores[1]})
-
+        data = pd.DataFrame({
+          'Match': range(1, min_length + 1),
+          'Actual Points Scored': scores[0][:min_length],
+          'Predicted Points Scored': scores[1][:min_length]
+        })
+        
         # Create scatter plot
         scatter_plot = alt.Chart(data).mark_circle(size=60).encode(
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
