@@ -213,12 +213,12 @@ def individualTeamScatterPlot(scores_data):
             )
 
         # Combine scatter plot and line of best fit
-        line_of_fit = scatter_plot.transform_regression('Match','Points Scored').mark_line()
+        #line_of_fit = scatter_plot.transform_regression('Match','Points Scored').mark_line()
         
-        combined_chart = alt.layer(scatter_plot, line_of_fit)
+        #combined_chart = alt.layer(scatter_plot, line_of_fit)
 
         # Display the chart
-        st.altair_chart(combined_chart, use_container_width=True)
+        st.altair_chart(scatter_plot, use_container_width=True)
 
 
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
