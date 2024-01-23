@@ -198,7 +198,7 @@ def individualTeamScatterPlot(scores_data):
         scatter_plot = alt.Chart(data).mark_circle(size=60).encode(
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
             alt.Y("Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
-            alt.Color("Match:N").legend(None),
+            alt.Color("Red").legend(None),
             ).properties(
                 width=200,
                 height=300
