@@ -231,8 +231,9 @@ def individualTeamScatterPlot(scores_data):
         #combined_chart = alt.layer(scatter_plot, line_of_fit)
 
         # Display the chart
-        overlayed_scatter = alt.layer(scatter_plot_1, scatter_plot_2)
-        st.altair_chart(overlayed_scatter, use_container_width=True)
+        st.altair_chart(scatter_plot_1, use_container_width=True)
+        st.altair_chart(scatter_plot_2, use_container_width=True)
+
 
 
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
