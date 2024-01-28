@@ -188,10 +188,12 @@ def basicTeamBoxPlot(tmevscr):
     # Display the boxplot
     st.altair_chart(boxplot, use_container_width=True)
     
+    
 def individualTeamScatterPlot(scores_data):
     
     for event, scores in scores_data.items():
         min_length = min(len(scores[0]), len(scores[1]))
+        st.write(min_length)
     
         # Prepare data for scatter plot
         data = pd.DataFrame({
@@ -211,10 +213,10 @@ def individualTeamScatterPlot(scores_data):
             ).properties(
                 width=200,
                 height=300
-            ).configure_legend(
-                orient='right'
-            )
-            
+            )#.configure_legend(
+             #   orient='right'
+            #)
+        
         scatter_plot_2 = alt.Chart(data).mark_circle(size=60).encode(
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
             alt.Y("Predicted Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
@@ -222,17 +224,18 @@ def individualTeamScatterPlot(scores_data):
             ).properties(
                 width=200,
                 height=300
-            ).configure_legend(
-                orient='right'
             )
+            #.configure_legend(
+            #    orient='right'
+            #)
 
         # Combine scatter plot and line of best fit
         #line_of_fit = scatter_plot.transform_regression('Match','Points Scored').mark_line()
         
-        #combined_chart = alt.layer(scatter_plot, line_of_fit)
+        combined_chart = scatter_plot_2 + scatter_plot_1
 
         # Display the chart
-        st.altair_chart(scatter_plot_1, use_container_width=True)
+        st.altair_chart(combined_chart, use_container_width=True)
         #st.altair_chart(scatter_plot_2, use_container_width=True)
 
 
