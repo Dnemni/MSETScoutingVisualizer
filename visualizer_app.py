@@ -202,9 +202,11 @@ def individualTeamScatterPlot(scores_data):
         
         st.write(data)
         # Create scatter plot
+        #data = pd.DataFrame({'Match': range(1, len(scores) + 1), 'Points Scored': scores})
+
         scatter_plot = alt.Chart(data).mark_circle(size=60).encode(
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
-            alt.Y("Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
+            alt.Y("Actual Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
             alt.Color("variable:N", legend=alt.Legend(title="Score Type")),
             ).properties(
                 width=200,
@@ -212,6 +214,18 @@ def individualTeamScatterPlot(scores_data):
             ).configure_legend(
                 orient='right'
             )
+            
+        scatter_plot = alt.Chart(data).mark_circle(size=60).encode(
+            alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
+            alt.Y("Predicted Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
+            alt.Color("variable:N", legend=alt.Legend(title="Score Type")),
+            ).properties(
+                width=200,
+                height=300
+            ).configure_legend(
+                orient='right'
+            )
+
 
         # Combine scatter plot and line of best fit
         #line_of_fit = scatter_plot.transform_regression('Match','Points Scored').mark_line()
