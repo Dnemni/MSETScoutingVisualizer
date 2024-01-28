@@ -214,6 +214,7 @@ def individualTeamScatterPlot(scores_data):
             ).configure_legend(
                 orient='right'
             )
+            
         scatter_plot_2 = alt.Chart(data).mark_circle(size=60).encode(
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
             alt.Y("Predicted Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
@@ -232,7 +233,7 @@ def individualTeamScatterPlot(scores_data):
 
         # Display the chart
         st.altair_chart(scatter_plot_1, use_container_width=True)
-        st.altair_chart(scatter_plot_2, use_container_width=True)
+        #st.altair_chart(scatter_plot_2, use_container_width=True)
 
 
 
