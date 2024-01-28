@@ -204,7 +204,7 @@ def individualTeamScatterPlot(scores_data):
         # Create scatter plot
         #data = pd.DataFrame({'Match': range(1, len(scores) + 1), 'Points Scored': scores})
 
-        scatter_plot = alt.Chart(data).mark_circle(size=60).encode(
+        scatter_plot_1 = alt.Chart(data).mark_circle(size=60).encode(
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
             alt.Y("Actual Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
             alt.Color("variable:N", legend=alt.Legend(title="Score Type")),
@@ -213,12 +213,17 @@ def individualTeamScatterPlot(scores_data):
                 height=300
             ).configure_legend(
                 orient='right'
-            ) + alt.Chart(data).mark_circle(size=60).encode(
-                alt.X("Match:N"),
-                alt.Y("Predicted Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
-                alt.Color("variable:N")
             )
-            
+        scatter_plot_2 = alt.Chart(data).mark_circle(size=60).encode(
+            alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
+            alt.Y("Predicted Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
+            alt.Color("variable:N", legend=alt.Legend(title="Score Type")),
+            ).properties(
+                width=200,
+                height=300
+            ).configure_legend(
+                orient='right'
+            )
 
         # Combine scatter plot and line of best fit
         #line_of_fit = scatter_plot.transform_regression('Match','Points Scored').mark_line()
@@ -226,7 +231,7 @@ def individualTeamScatterPlot(scores_data):
         #combined_chart = alt.layer(scatter_plot, line_of_fit)
 
         # Display the chart
-        st.altair_chart(scatter_plot, use_container_width=True)
+        st.altair_chart((scatter_plot_1+scatter_plot_2), use_container_width=True)
 
 
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
