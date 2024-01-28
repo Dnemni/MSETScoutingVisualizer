@@ -192,13 +192,14 @@ def basicTeamBoxPlot(tmevscr):
 def individualTeamScatterPlot(scores_data):
     
     for event, scores in scores_data.items():
+        st.write("Event: ", event)
         min_length = min(len(scores[0]), len(scores[1]))
     
         # Prepare data for scatter plot
         data = pd.DataFrame({
           'Match': range(1, min_length + 1),
-          'Actual Points Scored': scores[0][:min_length],
-          'Predicted Points Scored': scores[1][:min_length]
+          'Actual Score': scores[0][:min_length],
+          'Predicted Score': scores[1][:min_length]
         })
         
         # Create scatter plot
@@ -206,7 +207,7 @@ def individualTeamScatterPlot(scores_data):
 
         scatter_plot_1 = alt.Chart(data).mark_circle(size=60).encode(
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
-            alt.Y("Actual Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
+            alt.Y("Actual Score:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
             color = alt.value("blue")
             #alt.Color("variable:N", legend=alt.Legend(title="Score Type")),
             ).properties(
@@ -218,7 +219,7 @@ def individualTeamScatterPlot(scores_data):
         
         scatter_plot_2 = alt.Chart(data).mark_circle(size=60).encode(
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
-            alt.Y("Predicted Points Scored:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
+            alt.Y("Predicted Score:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
             color = alt.value("orange")
             #alt.Color("variable:N", legend=alt.Legend(title="Score Type")),
             ).properties(
