@@ -284,7 +284,7 @@ with tab1:
         st.write("Team " + str(tm) + " Event Scores Boxplot")
         basicTeamBoxPlot(evscr)
         
-        st.write("Team " + str(tm) + "Predicted vs Actual Scores Scatterplot")
+        st.write("Team " + str(tm) + " Predicted vs Actual Scores Scatterplot")
         individualTeamScatterPlot(nevscr)
 
 with tab2:
