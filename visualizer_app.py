@@ -294,7 +294,9 @@ with tab1:
 with tab2:
     st.header("Awards & Stats")
     for idx, (tm, tmy, evnt) in enumerate(teams_info):
+        st.write("Team " + str(tm))
         awards = tba.team_awards(int(tm), int(tmy))
+        
         if len(awards) == 0:
             st.write('In %d, team %d won no awards.' % (tmy, int(tm)))
         elif len(awards) == 1:
