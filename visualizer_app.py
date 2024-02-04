@@ -293,10 +293,11 @@ with tab1:
 
 with tab2:
     st.header("Awards & Stats")
-    awards = tba.team_awards(int(tm), int(tmy))
-    if len(awards) == 0:
-        st.write('In %d, team won no awards.' % (tmy))
-    elif len(awards) == 1:
-        st.write('In %d, team won %d award, award list: %s.' % (tmy, len(awards), ", ".join('%s (%s)' % (award.name, award.event_key) for award in awards)))
-    else:
-        st.write('In %d, team won %d awards, award list: %s.' % (tmy, len(awards), ", ".join('%s (%s)' % (award.name, award.event_key) for award in awards)))
+    for idx, (tm, tmy, evnt) in enumerate(teams_info):
+        awards = tba.team_awards(int(tm), int(tmy))
+        if len(awards) == 0:
+            st.write('In %d, team %d won no awards.' % (tmy, int(tm)))
+        elif len(awards) == 1:
+            st.write('In %d, team %d won %d award, award list: %s.' % (tmy, int(tm), len(awards), ", ".join('%s (%s)' % (award.name, award.event_key) for award in awards)))
+        else:
+            st.write('In %d, team %d won %d awards, award list: %s.' % (tmy, int(tm), len(awards), ", ".join('%s (%s)' % (award.name, award.event_key) for award in awards)))
