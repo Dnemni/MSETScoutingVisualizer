@@ -81,35 +81,39 @@ def getscoreinfo(t, y, events):
 def getscoreinfoNew(t, y, events):
     d = {}
     for event in events:
-        matches = tba.team_matches(team="frc"+str(t), year=y)
-        playoffs = tba.event_predictions(str(y) + event)["match_predictions"]["playoff"]
-        quals = tba.event_predictions(str(y) + event)["match_predictions"]["qual"]
-        scorePrd = [[],[]]
-        for alliance in matches:
-            blue_score = alliance['alliances']['blue']['score']
-            blue_teams = alliance['alliances']['blue']['team_keys']
-            red_score = alliance['alliances']['red']['score']
-            red_teams = alliance['alliances']['red']['team_keys']
-            eventChosen = alliance['event_key']
+        try:
+            matches = tba.team_matches(team="frc"+str(t), year=y)
+            playoffs = tba.event_predictions(str(y) + event)["match_predictions"]["playoff"]
+            quals = tba.event_predictions(str(y) + event)["match_predictions"]["qual"]
+            scorePrd = [[],[]]
+            for alliance in matches:
+                blue_score = alliance['alliances']['blue']['score']
+                blue_teams = alliance['alliances']['blue']['team_keys']
+                red_score = alliance['alliances']['red']['score']
+                red_teams = alliance['alliances']['red']['team_keys']
+                eventChosen = alliance['event_key']
 
-            teamcode = "frc"+str(t)
-            if eventChosen == (str(y) + event):
-                if teamcode in blue_teams:
-                    scorePrd[0].append(blue_score)
-                    for keys in playoffs:
-                        if(keys == alliance['key']):
-                            scorePrd[1].append(playoffs[keys]["blue"]["score"])
-                    for keys in quals:
-                        if(keys == alliance['key']):
-                            scorePrd[1].append(quals[keys]["blue"]["score"])
-                else:
-                    scorePrd[0].append(red_score)
-                    for keys in playoffs:
-                        if(keys == alliance['key']):
-                            scorePrd[1].append(playoffs[keys]["red"]["score"])
-                    for keys in quals:
-                        if(keys == alliance['key']):
-                            scorePrd[1].append(quals[keys]["red"]["score"])
+                teamcode = "frc"+str(t)
+                if eventChosen == (str(y) + event):
+                    if teamcode in blue_teams:
+                        scorePrd[0].append(blue_score)
+                        for keys in playoffs:
+                            if(keys == alliance['key']):
+                                scorePrd[1].append(playoffs[keys]["blue"]["score"])
+                        for keys in quals:
+                            if(keys == alliance['key']):
+                                scorePrd[1].append(quals[keys]["blue"]["score"])
+                    else:
+                        scorePrd[0].append(red_score)
+                        for keys in playoffs:
+                            if(keys == alliance['key']):
+                                scorePrd[1].append(playoffs[keys]["red"]["score"])
+                        for keys in quals:
+                            if(keys == alliance['key']):
+                                scorePrd[1].append(quals[keys]["red"]["score"])
+        except:
+            st.error("No predictions. Try a different year and/or match.")
+            st.stop()
         d[event] = scorePrd
     return d
 
