@@ -265,7 +265,7 @@ if 'buttonClick' not in st.session_state:
 if st.button("Add Team", type="primary", key=f"add_team_{x}"):
     st.session_state.buttonClick += 1
 
-tab1, tab2, tab3 = st.tabs(["Plots", "Awards", "Blank (pictures?)"])
+tab1, tab2 = st.tabs(["Plots", "Awards"])
 
 for i in range (st.session_state.buttonClick):
     globals()["sb" + str(x)] = SideBarSetup()
