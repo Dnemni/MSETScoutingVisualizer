@@ -112,7 +112,7 @@ def getscoreinfoNew(t, y, events):
                             if(keys == alliance['key']):
                                 scorePrd[1].append(quals[keys]["red"]["score"])
         except:
-            st.error("No data. Try a different year and/or match.")
+            st.error("No data for this event. Try a different event.")
             st.stop()
         d[event] = scorePrd
     return d
