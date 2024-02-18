@@ -216,7 +216,7 @@ def individualTeamScatterPlot(scores_data):
         scatter_plot_1 = alt.Chart(data).mark_circle(size=60).encode(
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
             alt.Y("Actual Score:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
-            color = alt.value("blue")
+            color = alt.value("blue"),
             tooltip = ['Match Name', 'Actual Score', 'Alliance'] 
             #alt.Color("variable:N", legend=alt.Legend(title="Score Type")),
             ).properties(
@@ -229,7 +229,7 @@ def individualTeamScatterPlot(scores_data):
         scatter_plot_2 = alt.Chart(data).mark_circle(size=60).encode(
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
             alt.Y("Predicted Score:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
-            color = alt.value("orange")
+            color = alt.value("orange"),
             tooltip = ['Match Name', 'Predicted Score', 'Alliance'] 
             #alt.Color("variable:N", legend=alt.Legend(title="Score Type")),
             ).properties(
