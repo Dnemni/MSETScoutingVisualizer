@@ -199,11 +199,15 @@ def individualTeamScatterPlot(scores_data):
         st.write("Event: ", event)
         min_length = min(len(scores[0]), len(scores[1]))
     
+        matchnames, alliances = getEventAlliances(tm, tmy, event)
+        st.write(matchnames, alliances)
         # Prepare data for scatter plot
         data = pd.DataFrame({
           'Match': range(1, min_length + 1),
           'Actual Score': scores[0][:min_length],
-          'Predicted Score': scores[1][:min_length]
+          'Predicted Score': scores[1][:min_length],
+          'Match Name': matchnames,
+          'Alliance': alliances
         })
         
         # Create scatter plot
@@ -243,7 +247,31 @@ def individualTeamScatterPlot(scores_data):
         st.altair_chart(combined_chart, use_container_width=True)
         #st.altair_chart(scatter_plot_2, use_container_width=True)
 
+def getEventAlliances(t, y, event):
+    matches = tba.team_matches(team="frc"+str(t), year=y)
+    matchnames = []
+    alliances = []
+    for alliance in matches:
+        blue_score = alliance['alliances']['blue']['score']
+        blue_teams = alliance['alliances']['blue']['team_keys']
+        red_score = alliance['alliances']['red']['score']
+        red_teams = alliance['alliances']['red']['team_keys']
+        eventChosen = alliance['event_key']
+        matchNumber = alliance['key']
+        teamcode = "frc"+str(t)
+        #print(eventChosen, str(y) + event)
+        #print(teamcode)
 
+        if eventChosen == (str(y) + event):
+            matchnames.append(matchNumber.split("_")[1])
+            print(matchNumber.split("_")[1])
+            if teamcode in blue_teams:
+                alliances.append(blue_teams)
+                print(blue_teams)
+            else:
+                alliances.append(red_teams)
+                print(red_teams)
+    return matchnames, alliances
 
 tba = tbapy.TBA('kDUcdEfvMKYdouPPg0d9HudlOZ19GLwBBOH3CZuXMjMf7XITviY1eJrSs1jkrOYX')
 
@@ -284,7 +312,7 @@ with tab1:
     for idx, (tm, tmy, evnt) in enumerate(teams_info):
         evscr = getscoreinfo(tm, tmy, evnt)
         nevscr = getscoreinfoNew(tm, tmy, evnt)
-        
+                
         st.write("Team " + str(tm) + " Event Scores Boxplot")
         basicTeamBoxPlot(evscr)
         
