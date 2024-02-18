@@ -200,7 +200,6 @@ def individualTeamScatterPlot(scores_data):
         min_length = min(len(scores[0]), len(scores[1]))
     
         matchnames, alliances = getEventAlliances(tm, tmy, event)
-        st.write(matchnames, alliances)
         # Prepare data for scatter plot
         data = pd.DataFrame({
           'Match': range(1, min_length + 1),
@@ -217,7 +216,7 @@ def individualTeamScatterPlot(scores_data):
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
             alt.Y("Actual Score:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
             color = alt.value("blue"),
-            tooltip = ['Match Name', 'Actual Score', 'Alliance'] 
+            tooltip = ['Match', 'Match Name', 'Actual Score', 'Alliance'] 
             #alt.Color("variable:N", legend=alt.Legend(title="Score Type")),
             ).properties(
                 width=200,
@@ -230,7 +229,7 @@ def individualTeamScatterPlot(scores_data):
             alt.X("Match:N", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")),
             alt.Y("Predicted Score:Q", axis=alt.Axis(labels=True, ticks=True, domain=True, grid=True, domainColor="white", gridColor="white", labelColor="black", tickColor="white", titleColor="black")).scale(zero=False),
             color = alt.value("orange"),
-            tooltip = ['Match Name', 'Predicted Score', 'Alliance'] 
+            tooltip = ['Match', 'Match Name', 'Predicted Score', 'Alliance'] 
             #alt.Color("variable:N", legend=alt.Legend(title="Score Type")),
             ).properties(
                 width=200,
